@@ -1,0 +1,56 @@
+@import '../partials/variables';
+@import '../partials/mixins';
+
+
+
+.one-list-li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .one-list-input {
+        border: none;
+        //margin-top: 10px;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #f5eec267;
+        font-family: Dosis-SemiBold;
+        color: $font-color;
+        font-size: 0.8rem;
+        width: 70%;
+        transform: scale(100%);
+        transition: transform 0.1s ease-in-out;
+
+        &:hover {
+            transform: scale(110%);
+            -webkit-box-shadow: 0px 5px 15px -1px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 5px 15px -1px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 5px 15px -1px rgba(0, 0, 0, 0.75);
+        }
+
+    }
+
+    .one-list-input-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 1.5rem;
+
+    }
+
+
+    .list-err {
+        font-size: $err-font-size;
+        color: $err-color;
+    }
+
+    .input-err {
+        border: 1px solid $err-color;
+    }
+
+    .delete-list-button {
+        @include deleteButton()
+    }
+}

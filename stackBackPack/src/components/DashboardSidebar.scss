@@ -1,0 +1,46 @@
+@import '../partials/variables';
+
+aside {
+    width: 15%;
+    //height: min-content;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $sidebar-color;
+    border-radius: 15px;
+    margin: 5px;
+
+
+    .new-list-button {
+        text-decoration: none;
+        min-width: 80%;
+        height: 1.5rem;
+        border: 1px solid $btn-color;
+        text-align: center;
+        border-radius: 5px;
+        background-color: $btn-color;
+        transform: rotate(0deg);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s ease-in-out;
+        margin: 5px;
+        font-family: 'Dosis-SemiBold';
+        color: $font-color;
+        font-size: 1rem;
+
+        &:hover {
+            transform: rotate(2deg) scale(110%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+
+
+        }
+
+    }
+
+    .lists {
+  
+        width: 80%;
+        list-style: none;
+        padding: 0;
+    }
+}

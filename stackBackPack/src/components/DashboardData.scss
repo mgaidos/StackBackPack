@@ -1,0 +1,68 @@
+@import '../partials/variables';
+
+.dashboard-data {
+    width: 95%;
+    //height: min-content;
+    min-height: 100%;
+    background-color: $bg-dashboard-data;
+    border-radius: 15px;
+    //padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    overflow-x: hidden;
+    margin: 5px; 
+   // padding-bottom: 2.5rem; 
+
+    .add-category-button {
+        text-decoration: none;
+        width: max-content;
+        height: 1.5rem;
+        border: 1px solid $btn-color;
+        text-align: center;
+        border-radius: 5px;
+        background-color: $btn-color;
+        transform: rotate(0deg);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s ease-in-out;
+        margin: 20px 0 0 0;
+        font-family: 'Dosis-SemiBold';
+        color: $font-color;
+        font-size: 1rem;
+    
+
+        &:hover {
+            transform: rotate(2deg) scale(110%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+
+
+        }
+    }
+
+    .category-list {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    .summary-container {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .chart-container {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        
+    }
+
+    .total-list-container {
+        flex: 1;
+    }
+}

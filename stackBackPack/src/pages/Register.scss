@@ -1,0 +1,14 @@
+@import "../partials/variables";
+
+.main-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: clamp(30%, 40%, 350px);
+    min-height: 10%;
+    margin: 0 auto;
+    border-radius: 25px;
+    background-color: $forms-color;
+}

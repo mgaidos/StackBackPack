@@ -1,0 +1,26 @@
+@import '../partials/variables';
+@import '../partials/mixins';
+
+.one-total-list-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px groove rgba(153, 146, 144, 0.73);
+
+    .one-total-category-name {
+        width: 40%;
+        text-align: center;
+    }
+
+    .weight-unit-container {
+        display: flex;
+        width: 40%;
+        //width: 10%;
+        justify-content: center;
+    }
+}
+
+.one-total-list-item:nth-last-child(2) {
+    border-bottom: 2px dotted black;
+}
+

@@ -1,0 +1,38 @@
+@import '../partials/variables';
+
+@mixin dashboardDataInputs ($width) {
+    width: $width;
+    border: none;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: inherit;
+    font-family: Dosis-SemiBold;
+    color: $font-color;
+    font-size: 0.8rem;
+}
+
+@mixin deleteButton () {
+        
+        text-decoration: none;
+        min-width: 22.5px;
+        height: 1rem;
+        border: 1px solid $btn-color;
+        text-align: center;
+        border-radius: 5px;
+        background-color: $btn-color;
+        transform: rotate(0deg);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s ease-in-out;
+
+
+
+        &:hover {
+            transform: rotate(2deg) scale(110%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+
+
+        }
+
+
+    }

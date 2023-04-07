@@ -1,0 +1,11 @@
+@import '../partials/variables';
+.dashboard {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: calc(100% - 4.5rem);
+    width: 100%;
+}
+
+

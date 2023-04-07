@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Dosis';
+    src: url('../src/fonts/static/Dosis-Medium.ttf');
+    /*Font Dosis*/
+}
+
+@font-face {
+    font-family: 'Dosis-SemiBold';
+    src: url('../src/fonts/static/Dosis-SemiBold.ttf');
+    /*Font Dosis*/
+}
+//colors
+$font-color: #39395f;
+$bg-color: #f5eec2;
+$bg-footer: #6f9379;
+$btn-color: #6f9379;
+$forms-color:#8a936f2f;
+$err-color: rgb(220, 3, 3);
+$sidebar-color:#6f937983;
+$bg-dashboard-data: rgba(255, 255, 255, 0.384);
+
+//fonts
+$heading-font: "Dosis";
+$main-font:"Dosis-SemiBold";
+$font-size: 125%;
+$err-font-size: 70%;

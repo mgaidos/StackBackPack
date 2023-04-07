@@ -1,0 +1,45 @@
+@import '../partials/variables';
+@import '../partials/mixins';
+
+.total-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 190px;
+    
+
+    .total-list-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 2px groove rgba(153, 146, 144, 0.73);
+
+        .total-list-header-span {
+            width: 40%;
+            text-align: center;
+        }
+    }
+
+    .total-list-footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        .one-total-category-name {
+            width: 40%;
+            text-align: center;
+        }
+        
+    }
+
+    .total-sum-of-weights {
+        display: flex;
+        width: 40%;
+        //width: 10%;
+        justify-content: center;
+    }
+
+  
+}
