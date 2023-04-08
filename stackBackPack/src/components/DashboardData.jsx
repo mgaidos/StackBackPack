@@ -41,24 +41,22 @@ const DashboardData = (props) => {
     dataSet: [],
     labels: []
   })
+
+  const [totalUnit, setTotalUnit] = useState('g')
   const [labels, setLabels] = useState([])
+
+  const [itemUnit, setItemUnit] = useState('')
+  
 
   useEffect(() => {
     console.log(dataForChart)
   }, [dataForChart])
-  /*
-    const cleanUp = () => {
-      setDataSet([])
-      setLabels([])
-    }
   
-    useEffect(() => {
-  
-      return () => {
-        cleanUp
-      }
-    }, [])
-  */
+  useEffect(()=> {
+    console.log(totalUnit)
+  },[totalUnit])
+
+
   useEffect(() => {
     //Filter the categories of the selected list
     const categoriesOfSelectedList = categories.filter(category => category._idOfList === idOfSelectedList)
@@ -107,7 +105,7 @@ const DashboardData = (props) => {
     console.log('Počítám items..' + categoryId)
 
     if (items.length > 0) {
-      const itemsWeight = items.filter(item => item._idOfCategory == categoryId)
+      let itemsWeight = items.filter(item => item._idOfCategory == categoryId)
         .map(item => {
           if (item.weight) {
             if (item.unit === 'g') {
@@ -133,8 +131,16 @@ const DashboardData = (props) => {
         }, 0)
       console.log(itemsWeight)
 
+      if(totalUnit === 'g') {
+         itemsWeight = itemsWeight * 1000
+      }
+
+      if(totalUnit === 'kg') {
+        itemsWeight === itemsWeight
+      }
+
       // grams to kilograms
-      setTotalCategoryWeight((itemsWeight / 1000).toPrecision(3))
+      setTotalCategoryWeight((itemsWeight / 1000))
       return itemsWeight
     }
 
@@ -171,6 +177,9 @@ const DashboardData = (props) => {
               key={new Date().getTime()}
               labels={labels}
               dataForChart={dataForChart}
+              setTotalUnit={setTotalUnit}
+              totalUnit={totalUnit}
+              itemUnit={itemUnit}
             />
           </div>
         </div>
@@ -202,6 +211,9 @@ const DashboardData = (props) => {
             setCategories={setCategories}
             sumWeights={sumWeights}
             sumPcs={sumPcs}
+            totalUnit={totalUnit}
+            setItemUnit={setItemUnit}
+            itemUnit={itemUnit}
           />
         })
         : ''}

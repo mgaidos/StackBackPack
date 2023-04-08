@@ -33,7 +33,9 @@ const Category = (props) => {
         listsInDb,
         sumWeights,
         sumPcs,
-
+        totalUnit,
+        setItemUnit,
+        itemUnit
     }
         = props
 
@@ -42,53 +44,10 @@ const Category = (props) => {
 
     const [totalCategoryWeight, setTotalCategoryWeight] = useState(0)
     const [totalPcsInCatgeory, setTotalPcsInCatgeory] = useState('')
+    
 
  
-    /*
-        const sumWeights = () => {
-            console.log('Počítám items..' + categoryId)
     
-            if (items.length > 0) {
-                const itemsWeight = items.filter(item => item._idOfCategory == categoryId)
-                    .map(item => {
-                        if (item.weight) {
-                            if(item.unit === 'g') {
-                                //console.log('grams')
-                                return item.weight * item.quantity
-                            }
-    
-                            if(item.unit === 'kg') {
-                                //console.log('kilograms')
-                                return (item.weight * 1000) * item.quantity
-                            }
-    
-                            //TODO: add another units
-    
-                        } else {
-                            return
-                        }
-                    })
-                    .reduce((actualVal, nextVal) => {
-                        return actualVal + nextVal
-                    }, 0)
-                console.log(itemsWeight)
-    
-                // grams to kilograms
-                setTotalCategoryWeight((itemsWeight / 1000).toPrecision(3))
-            }
-    
-        }
-    
-        const sumPcs = () => {
-            const itemsPcs = items.filter(item => item._idOfCategory == categoryId)
-                .map(item => item.quantity ? item.quantity : '')
-                .reduce((actualVal, nextVal) => {
-                    return actualVal + nextVal
-                }, 0)
-    
-            setTotalPcsInCatgeory(itemsPcs)
-        }
-    */
     useEffect(() => {
         console.log(actualCategoryNameValue)
     }, [actualCategoryNameValue])
@@ -100,7 +59,7 @@ const Category = (props) => {
     useEffect(() => {
         sumWeights(categoryId, setTotalCategoryWeight)
         sumPcs(categoryId, setTotalPcsInCatgeory)
-    }, [items])
+    }, [items, totalUnit, itemUnit])
 
     const { userId } = useParams()
 
@@ -232,6 +191,8 @@ const Category = (props) => {
                     setItems={setItems}
                     idOfSelectedList={idOfSelectedList}
                     idOfSelectedCategory={idOfSelectedCategory}
+                    setItemUnit={setItemUnit}
+            
                 />
             })}
             <li className='category-total'>
@@ -240,7 +201,7 @@ const Category = (props) => {
                     <div><span className='category-total-qty'>{totalPcsInCatgeory}</span></div>
                     <div className='category-total-weight'>
                         <span className='category-total-value'>{totalCategoryWeight}</span>
-                        <span className='category-total-unit'>{totalCategoryWeight ? 'kg' : ''}</span>
+                        <span className='category-total-unit'>{totalUnit}</span>
                     </div>
                     <span className='category-total-help-span'></span>
                 </div>

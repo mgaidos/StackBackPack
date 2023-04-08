@@ -21,6 +21,7 @@ const Item = (props) => {
         unit,
         items,
         setItems,
+        setItemUnit
     }
         = props
 
@@ -83,6 +84,8 @@ const Item = (props) => {
                     { ...oneItem, unit: e.target.value }
                     :
                     oneItem))
+
+            setItemUnit(e.target.value)
 
         }
 

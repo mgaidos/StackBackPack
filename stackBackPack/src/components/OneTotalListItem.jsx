@@ -1,10 +1,28 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 
 //styles
 import './OneTotalListItem.scss'
 
 const OneTotalListItem = (props) => {
-    const { value, label } = props
+    const { value, label, totalUnit,  } = props
+    const [totalValue, setTotalValue] = useState()
+
+    useEffect(()=> {
+        finalValue(totalUnit)
+    },[])
+
+    const finalValue = (totalUnit) => {
+    let result
+        if(totalUnit === 'g') {
+            result = value
+        }
+
+        if(totalUnit === 'kg') {
+            result = value / 1000
+        }
+        setTotalValue(result)
+    }
 
     return <li className='one-total-list-item'>
         <div className='one-total-category-name-container'>
@@ -14,8 +32,8 @@ const OneTotalListItem = (props) => {
         </div>
         <div className='weight-unit-container'>
             <div className='weight-unit-wrapper'>
-                <span>{value}</span>
-                <span>kg</span>
+                <span>{totalValue}</span>
+                <span>{totalUnit}</span>
             </div>
         </div>
     </li>

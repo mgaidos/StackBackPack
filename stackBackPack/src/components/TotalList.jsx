@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 //styles
 import './TotalList.scss'
@@ -8,13 +8,37 @@ import OneTotalListItem from './OneTotalListItem'
 
 const TotalList = (props) => {
 
-    const { dataForChart } = props
+
+    const { dataForChart, setTotalUnit, totalUnit} = props
 
     const totalValue = dataForChart.dataSet.reduce((acc, cur) => {
         return acc + cur
     }, 0)
 
-    return <ul className='total-list'>
+    const finalValue = (totalUnit) => {
+        let result
+        if (totalUnit === 'g') {
+            result = totalValue
+        }
+
+        if (totalUnit === 'kg') {
+            result = totalValue / 1000
+        }
+        return result
+    }
+
+    const onSelectChange = (e) => {
+
+        const changingElement = e.target.name
+
+        if (changingElement === 'unit-select') {
+            setTotalUnit(e.target.value)
+        }
+
+    }
+
+
+    return <ul onChange={onSelectChange} className='total-list'>
         <li className='total-list-header-container'>
             <div className='total-list-header-span-wrapper'>
                 <span className='total-list-header-category-span'>Category</span>
@@ -29,6 +53,8 @@ const TotalList = (props) => {
                 dataForChart={dataForChart}
                 value={value}
                 label={dataForChart.labels[index]}
+                totalUnit={totalUnit}
+    
             />)
         }
 
@@ -37,9 +63,9 @@ const TotalList = (props) => {
                 <span className='total-list-footer-total-span'>Total</span>
             </div>
             <div className='total-list-footer-span-wrapper'>
-                <span className='total-list-footer-total-value' >{totalValue}</span>
+                <span className='total-list-footer-total-value' >{finalValue(totalUnit)}</span>
                 <div>
-                    <select>
+                    <select name='unit-select' >
                         <option value="g">g</option>
                         <option value="kg">kg</option>
                     </select>
