@@ -7,9 +7,17 @@
     justify-content: space-around;
     border-bottom: 1px groove rgba(153, 146, 144, 0.73);
 
-    .one-total-category-name {
+    .one-total-category-name-container {
+        display: flex;
         width: 40%;
-        text-align: center;
+        //width: 10%;
+        justify-content: center;
+
+        .one-total-category-name-wrapper {
+            display: flex;
+            width: 50%;
+            justify-content: flex-start;
+        }
     }
 
     .weight-unit-container {
@@ -17,6 +25,14 @@
         width: 40%;
         //width: 10%;
         justify-content: center;
+
+        .weight-unit-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            width: 50%;
+
+    
+        }
     }
 }
 

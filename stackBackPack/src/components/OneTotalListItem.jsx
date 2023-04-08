@@ -4,13 +4,19 @@ import React from 'react'
 import './OneTotalListItem.scss'
 
 const OneTotalListItem = (props) => {
-    const  {value, label } = props
+    const { value, label } = props
 
     return <li className='one-total-list-item'>
-        <span className='one-total-category-name'>{label}</span>
+        <div className='one-total-category-name-container'>
+            <span className='one-total-category-name-wrapper'>
+                {label}
+            </span>
+        </div>
         <div className='weight-unit-container'>
-            <span>{value}</span>
-            <span>kg</span>
+            <div className='weight-unit-wrapper'>
+                <span>{value}</span>
+                <span>kg</span>
+            </div>
         </div>
     </li>
 

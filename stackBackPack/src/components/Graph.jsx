@@ -10,7 +10,7 @@ const Graph = (props) => {
     const data = {
         labels: dataForChart.labels,
         datasets: [{
-            label: 'My First Dataset',
+            label: 'Your Data',
             data: dataForChart.dataSet,
             backgroundColor: [
                 'rgb(255, 99, 132)',
@@ -38,7 +38,7 @@ const Graph = (props) => {
                             console.log(elements[0].element)
                         }
                     },
-                    animation: false,
+                    animation: true,
                     plugins: {
                         legend: {
                             display: true
