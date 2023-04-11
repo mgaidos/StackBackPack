@@ -45,84 +45,89 @@ const OneList = (props) => {
     const justUpdate = listsInDb.some(item => item._id == updatedOrNewListId)
 
 
-   // if (updatedOrNewListId) {
-      // pokud při přejmenování nove == stare nic se nestane 
-      if (oldName[0].listName == newName) {
-        return
-      } else if (isAlreadySaved.length > 0) {
-        //console.log('This name of list is already used')
-        setListNameExist(true)
-        return
-      } else if (justUpdate) {
-        //Updating the name of list
-        setListNameExist(false)
-  
-        const newArr = lists.map(oneList =>
-          oneList._id == updatedOrNewListId ? { ...oneList, listName: newName } : oneList
-        )
-        setLists(newArr)
+    // if (updatedOrNewListId) {
+    // pokud při přejmenování nove == stare nic se nestane 
+    if (oldName[0].listName == newName) {
+      return
+    } else if (isAlreadySaved.length > 0) {
+      //console.log('This name of list is already used')
+      setListNameExist(true)
+      return
+    } else if (justUpdate) {
+      //Updating the name of list
+      setListNameExist(false)
 
-        console.log(newArr)
+      const newArr = lists.map(oneList =>
+        oneList._id == updatedOrNewListId ? { ...oneList, listName: newName } : oneList
+      )
+      setLists(newArr)
 
-        axios.put(`http://localhost:3000/dashboard/${userId}`, {
-          _id, newName
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Custom-Header': 'updateListName'
+      console.log(newArr)
+
+      const accessToken = localStorage.getItem('token')
+
+      axios.put(`http://localhost:3000/dashboard/${userId}`, {
+        _id, newName
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Custom-Header': 'updateListName',
+          'Authorization': accessToken
+        }
+      })
+        .then(response => {
+          const data = response.data
+          console.log(response)
+
+          if (data.message === 'List name update was successful') {
+            console.log(data.message)
+          } else {
+            return
           }
         })
-          .then(response => {
-            const data = response.data
-            console.log(response)
-
-            if (data.message === 'List name update was successful') {
-              console.log(data.message)
-            } else {
-              return
-            }
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } else {
-
-        //Saving new list
-        setListNameExist(false)
-        const newArr = lists.map(oneList =>
-          oneList._id == updatedOrNewListId ? { ...oneList, listName: newName } : oneList
-        )
-        setLists(newArr)
-
-        //console.log(newArr)
-        const listName = e.target.value
-        axios.post(`http://localhost:3000/dashboard/${userId}`, {
-          _id, user, listName
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Custom-Header': 'savingNewList'
-          }
+        .catch(err => {
+          console.log(err)
         })
-          .then(response => {
-            const data = response.data
-            //console.log(data)
+    } else {
 
-            if (data.message === 'Data saved!!') {
-              console.log(data.message)
-            } else {
-              return
-            }
+      //Saving new list
+      setListNameExist(false)
+      const newArr = lists.map(oneList =>
+        oneList._id == updatedOrNewListId ? { ...oneList, listName: newName } : oneList
+      )
+      setLists(newArr)
 
-          })
-          .catch(err => {
-            console.log(err)
-          })
+      const accessToken = localStorage.getItem('token')
+      const listName = e.target.value
+
+      axios.post(`http://localhost:3000/dashboard/${userId}`, {
+        _id, user, listName
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Custom-Header': 'savingNewList',
+          'Authorization': accessToken
+        }
+      })
+        .then(response => {
+          const data = response.data
+          //console.log(data)
+
+          if (data.message === 'Data saved!!') {
+            console.log(data.message)
+          } else {
+            return
+          }
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
 
 
-        return
-      }
-   // }
+      return
+    }
+    // }
   }
 
 
@@ -130,11 +135,13 @@ const OneList = (props) => {
     const removedListId = parseInt(e.target.name)
     const filteredLists = lists.filter(list => list._id != removedListId)
     //console.log(removedListId)
+    const accessToken = localStorage.getItem('token')
 
     axios.delete(`http://localhost:3000/dashboard/${userId}`, {
       headers: {
         'Content-Type': 'application/json',
-        'Custom-Header': 'deleteList'
+        'Custom-Header': 'deleteList',
+        'Authorization' : accessToken
       },
       data: { removedListId: removedListId }
     })
@@ -155,7 +162,7 @@ const OneList = (props) => {
     setIdOfSelectedList(e.target.id)
     setDashboardDataHeading(e.target.value)
     e.target.value ? createNewCategory(e) : ''
-    
+
   }
 
   const handleChange = (e) => {
@@ -167,7 +174,7 @@ const OneList = (props) => {
 
 
   const handleBlur = (e) => {
-    changeListName(e) 
+    changeListName(e)
     actualListNameValue ? setListNameEmpty(false) : setListNameEmpty(true)
   }
 
@@ -196,7 +203,7 @@ const OneList = (props) => {
           onBlur={handleBlur}
           type={type}
           onClick={handleClickOnInput}
-          onChange={(e)=> {
+          onChange={(e) => {
             handleClickOnInput
             handleChange(e)
           }}

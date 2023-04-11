@@ -26,10 +26,8 @@ const LoginForm = () => {
     const [dbPasswordErr, setDbPasswordErr] = useState('')
     const navigate = useNavigate()
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-
-
 
         axios.post('http://localhost:3000/login', {
             email, password
@@ -52,7 +50,7 @@ const LoginForm = () => {
                 }
             })
             .catch(err => {
-                console.log(err.message)
+                console.log(err)
                 setDbEmailErr(err.response.data.message === 'User not found' ? 'User not found' : '')
                 setDbPasswordErr(err.response.data.message === 'Invalid password' ? 'Invalid password' : '')
             })

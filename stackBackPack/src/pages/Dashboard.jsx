@@ -13,7 +13,10 @@ import DashboardData from '../components/DashboardData'
 //styles
 import './Dashboard.scss'
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+const { setLoggedIn } = props
+ 
+
     //states
     const [authenticated, setAuthenticated] = useState(true)
 
@@ -42,15 +45,22 @@ const Dashboard = () => {
 
       /* fetching users lists */
     useEffect(() => {
+        const accessToken = localStorage.getItem('token')
+        console.log("tady tokeen")
+        console.log(accessToken)
+    
         axios.get(`http://localhost:3000/dashboard/${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'Custom-Header': 'fetchingUserLists'
+                'Custom-Header': 'fetchingUserLists',
+                'Authorization' : accessToken
+
             }
         })
             .then(response => {
+                console.log("JSEM V RESPONSEEEEEEEEE")
                 const data = response.data.result
-                //console.log(data)
+                
 
                 setLists(
                     ...lists,
@@ -63,9 +73,11 @@ const Dashboard = () => {
                 setCategories(cat)
                 setItems(items)
                 setListsInDb(data)
+                setLoggedIn(true)
             })
             .catch(err => {
                 console.log(err)
+                setAuthenticated(false)
             })
     }, [])
  
@@ -192,12 +204,14 @@ const Dashboard = () => {
 
 
         setItems(filteredItems)
+        const accessToken = localStorage.getItem('token')
 
         axios.delete(`http://localhost:3000/dashboard/${userId}`, {
 
             headers: {
                 'Content-Type': 'application/json',
-                'Custom-Header': 'deleteItem'
+                'Custom-Header': 'deleteItem',
+                'Authorization' : accessToken
             },
             data: {
                 idOfSelectedList: idOfSelectedList,
@@ -222,11 +236,12 @@ const Dashboard = () => {
 
         const removedCategoryId = e.target.name
         //console.log(e.target.name)
-
+        const accessToken = localStorage.getItem('token')
         axios.delete(`http://localhost:3000/dashboard/${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'Custom-Header': 'deleteCategory'
+                'Custom-Header': 'deleteCategory',
+                'Authorization' : accessToken
             },
             data: {
                 removedCategoryId: removedCategoryId,
@@ -253,13 +268,14 @@ const Dashboard = () => {
     }
 
     const saveItemToDb = (idOfList, idOfCategory, savingItem) => {
-
+        const accessToken = localStorage.getItem('token')
         axios.post(`http://localhost:3000/dashboard/${userId}`, {
             idOfList, idOfCategory, savingItem
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'Custom-Header': 'newItem'
+                'Custom-Header': 'newItem',
+                'Authorization' : accessToken
             }
         })
 

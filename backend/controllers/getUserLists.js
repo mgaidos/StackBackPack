@@ -42,12 +42,6 @@ const getUserLists = async (req, res) => {
             ])
                 /* Also the exec() method can be used */
                 .then(result => {
-
-                    if (!result.length) {
-                        console.log(result)
-                        res.status(400).json({ message: 'data not found' })
-                        return
-                    }
                     console.log(result)
                     res.status(201).json({ result })
                 })

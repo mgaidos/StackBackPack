@@ -15,14 +15,12 @@ const login = async (req, res) => {
       res.status(401).send(error.details[0].message);
       return
     }
-    // Zkontrolujte, zda se e-mailová adresa shoduje s e-mailem v databázi
 
     const user = await User.findOne({ email })
     if (!user) {
       return res.status(401).json({ message: "User not found" })
     }
 
-    // Zkontrolujte, zda se hesla shodují
     const isMatch = await bcrypt.compare(password, user.password)
     console.log("nic")
     if (!isMatch) {
@@ -30,32 +28,12 @@ const login = async (req, res) => {
     }
     console.log(JSON.stringify(user._id))
 
-    // Vytvoříme JWT token s ID uživatele jako payload
+
     const userId = { userId: user._id }
     //                               payload
-    const accessToken = jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET)
+    const accessToken = jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '148h' })
     console.log(accessToken)
 
-    /*
-    //middleware
-    const authenticateToken = (req, res, next) => {
-      const authHeader = req.headers['authorization']
-      const token = authHeader && authHeader.split(' ')[1]
-      if (token == null) return res.sendStatus(401)
-  
-      
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, userId) => {
-        if(err) return res.sendStatus(403)
-        req.userId = userId
-        next()
-      })
-    }
-  
-   
-  
-    authenticateToken(req, res)
-  
-   */
     return res.status(201).json({ token: accessToken, userId, message: 'Login successful' })
 
   } catch (err) {

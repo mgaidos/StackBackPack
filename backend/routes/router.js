@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+const auth = require('../auth/auth')
+
 const register = require('../controllers/register')
 const login = require('../controllers/login')
 const userData = require('../controllers/userData')
@@ -16,7 +18,9 @@ const updateItem = require('../controllers/updateItem')
 
 router.route('/register').post(register)
 
-router.route('/login').post(login)
+
+
+router.post('/login', (req, res) => login(req, res))
 
 
 
@@ -40,7 +44,7 @@ router.put('/dashboard/:id', (req, res) => {
 
 /* Handling many get requests to one url using custom header */
 
-router.get('/dashboard/:id', (req, res) => {
+router.get('/dashboard/:id', auth, (req, res) => {
 
     const customHeader = req.headers['custom-header']
 
@@ -52,10 +56,14 @@ router.get('/dashboard/:id', (req, res) => {
 })
 
 /* Handling many post requests to one url using custom header */
-router.post('/dashboard/:id', (req, res) => {
+router.post('/dashboard/:id',auth , (req, res) => {
 
     const customHeader = req.headers['custom-header']
-
+/*
+    if (customHeader === 'login') {
+        login(req, res)
+    }
+*/
     if (customHeader === 'newCategory') {
         newCategory(req, res)
     }
@@ -73,7 +81,7 @@ router.post('/dashboard/:id', (req, res) => {
 
 //router.route('/dashboard/:id').delete(deleteList)
 
-router.delete('/dashboard/:id', (req, res)=> {
+router.delete('/dashboard/:id',auth,  (req, res)=> {
     const customHeader = req.headers['custom-header']
     console.log(req.headers)
 

@@ -96,6 +96,8 @@ const Item = (props) => {
     const updateItem = () => {
         const updatedItem = items.filter(oneItem => oneItem._id == idOfSelectedItem)
 
+        const accessToken = localStorage.getItem('token')
+
         console.log("updatuju")
 
         axios.put(`http://localhost:3000/dashboard/${userId}`, {
@@ -103,7 +105,8 @@ const Item = (props) => {
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'Custom-Header': 'updateItem'
+                'Custom-Header': 'updateItem',
+                'Authorization' : accessToken
             }
         })
             .then(response => {

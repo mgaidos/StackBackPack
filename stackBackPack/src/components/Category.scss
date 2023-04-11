@@ -112,19 +112,21 @@
                         input[name='item-weight']::-webkit-outer-spin-button,
                         input[name='item-weight']::-webkit-inner-spin-button {
                             -webkit-appearance: none;
+
+
                             margin: 0;
                         }
 
                         /* Mozzila*/
                         input[name='item-weight'] {
-                            
 
+                            -moz-appearance: textfield;
                             margin: 0;
                             text-align: right;
                         }
 
                         select[name='item-unit'] {
-                            
+
                             margin: 0;
                         }
 
@@ -211,7 +213,7 @@
                     align-items: center;
                     width: 50px;
                     text-align: left;
-                    
+
                 }
             }
 

@@ -44,10 +44,10 @@ const Category = (props) => {
 
     const [totalCategoryWeight, setTotalCategoryWeight] = useState(0)
     const [totalPcsInCatgeory, setTotalPcsInCatgeory] = useState('')
-    
 
- 
-    
+
+
+
     useEffect(() => {
         console.log(actualCategoryNameValue)
     }, [actualCategoryNameValue])
@@ -69,12 +69,15 @@ const Category = (props) => {
     }
 
     const updateCategoryNameInDb = async (idOfSelectedList, clickedCategory, newCategoryName) => {
+
+        const accessToken = localStorage.getItem('token')
         await axios.put(`http://localhost:3000/dashboard/${userId}`, {
             idOfSelectedList, clickedCategory, newCategoryName
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'Custom-Header': 'updateCategoryName'
+                'Custom-Header': 'updateCategoryName',
+                'Authorization': accessToken
             }
         })
             .then(response => {
@@ -88,13 +91,16 @@ const Category = (props) => {
     }
 
     const saveCategoryToDb = (savingCategory) => {
+
+        const accessToken = localStorage.getItem('token')
         console.log(savingCategory)
         axios.post(`http://localhost:3000/dashboard/${userId}`, {
             savingCategory
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'Custom-Header': 'newCategory'
+                'Custom-Header': 'newCategory',
+                'Authorization': accessToken
             },
         })
             .then(response => {
@@ -192,7 +198,7 @@ const Category = (props) => {
                     idOfSelectedList={idOfSelectedList}
                     idOfSelectedCategory={idOfSelectedCategory}
                     setItemUnit={setItemUnit}
-            
+
                 />
             })}
             <li className='category-total'>

@@ -19,14 +19,15 @@ import ShardeLayout from './pages/ShardeLayout'
 
 const App = () => {
 
+  const [loggedIn, setLoggedIn] = useState(false)
  
   return <BrowserRouter >
     <Routes>
-      <Route path='/' element={<ShardeLayout />}>
+      <Route path='/' element={<ShardeLayout loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}>
         <Route index element={<Home />} />
         <Route path='/register' element={<Register />} />  
         <Route path='/login' element={<Login />} />
-        <Route path='/dashboard/:userId' element={<Dashboard />} /> 
+        <Route path='/dashboard/:userId' element={<Dashboard setLoggedIn={setLoggedIn} />} /> 
       </Route>
     </Routes>
   </BrowserRouter>

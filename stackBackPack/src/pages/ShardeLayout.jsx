@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import './SharedLayout.scss'
 
@@ -6,11 +7,14 @@ import './SharedLayout.scss'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-const ShardeLayout = () => {
+const ShardeLayout = (props) => {
+
+  const { loggedIn, setLoggedIn } = props
+
     return <>
-        <Navbar />
-        <Outlet />
-        <Footer />
+        <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Outlet/>
+        <Footer/>
     </>
 
 }
