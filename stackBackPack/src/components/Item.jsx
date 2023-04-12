@@ -29,15 +29,17 @@ const Item = (props) => {
 
     const { userId } = useParams()
 
+
     useEffect(() => {
         // This side effect is triggered by the handleChangeOnInputs function which changes the state of items. The function has debouncing set to 1000 ms. 
         if (updatingItems) {
             updateItem()
         }
         setUpdatingItems(false)
+
     }, [items])
 
-
+  
     const handleChangeOnInputs = debounce((e, id) => {
 
         setIdOfSelectedItem(id)
@@ -84,7 +86,7 @@ const Item = (props) => {
                     :
                     oneItem))
 
-            
+
 
         }
 
@@ -105,7 +107,7 @@ const Item = (props) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Custom-Header': 'updateItem',
-                'Authorization' : accessToken
+                'Authorization': accessToken
             }
         })
             .then(response => {

@@ -42,7 +42,7 @@ const DashboardData = (props) => {
     labels: []
   })
 
-  const [totalUnit, setTotalUnit] = useState('g')
+  const [totalUnit, setTotalUnit] = useState('kg')
   const [labels, setLabels] = useState([])
 
 
@@ -83,16 +83,13 @@ const DashboardData = (props) => {
           value = (currentValue.weight * 1000)
         }
 
-
-
         const existingItem = accumulator.find((item) => item._idOfCategory == currentValue._idOfCategory)
-        console.log(currentValue.quantity)
+      
         if (existingItem) {
           console.log(existingItem)
           existingItem.totalWeight += value * currentValue.quantity
 
         } else {
-          //accumulator.push({ _idOfCategory: currentValue._idOfCategory, totalWeight: currentValue.weight * currentValue.quantity })
 
           accumulator
             .push({
@@ -102,8 +99,6 @@ const DashboardData = (props) => {
         }
         return accumulator
       }, []).map(item => item.totalWeight ? item.totalWeight : '')
-
-      console.log(result)
 
       setDataForChart({ dataSet: result, labels: categoriesNames })
 
@@ -122,14 +117,16 @@ const DashboardData = (props) => {
   //counting the weight of each category
   const sumWeights = (categoryId, setTotalCategoryWeight) => {
     console.log('Počítám items..' + categoryId)
-
+    
     if (items.length > 0) {
+      console.log(items.filter(item => item._idOfCategory == categoryId))
       let itemsWeight = items.filter(item => item._idOfCategory == categoryId)
         .map(item => {
-          if (item.weight) {
+          if (item.weight === 0 || item.weight) {
             if (item.unit === 'g') {
-              //console.log('grams')
+              console.log('grams')
               const result = item.weight * item.quantity
+              console.log(item.weight)
               return result
             }
 

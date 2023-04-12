@@ -21,7 +21,7 @@ const OneTotalListItem = (props) => {
         if(totalUnit === 'kg') {
             result = value / 1000
         }
-        setTotalValue(result)
+        setTotalValue(result % 1 === 0 ? result : result.toFixed(3))
     }
 
     return <li className='one-total-list-item'>

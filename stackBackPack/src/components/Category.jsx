@@ -203,7 +203,7 @@ const Category = (props) => {
                 <div className='category-total-wrapper-div'>
                     <div><span className='category-total-qty'>{totalPcsInCatgeory}</span></div>
                     <div className='category-total-weight'>
-                        <span className='category-total-value'>{totalCategoryWeight.toPrecision(4)}</span>
+                        <span className='category-total-value'>{totalCategoryWeight % 1 === 0 ? totalCategoryWeight : totalCategoryWeight.toFixed(3)}</span>
                         <span className='category-total-unit'>{totalUnit}</span>
                     </div>
                     <span className='category-total-help-span'></span>

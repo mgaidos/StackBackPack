@@ -169,9 +169,9 @@ const { setLoggedIn } = props
                 _idOfList: idOfSelectedList,
                 itemName: '',
                 itemDescription: '',
-                quantity: '',
-                weight: '',
-                unit: ''
+                quantity: 0,
+                weight: 0,
+                unit: 'g'
 
             }
             ]

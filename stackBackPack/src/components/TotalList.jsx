@@ -24,7 +24,7 @@ const TotalList = (props) => {
         if (totalUnit === 'kg') {
             result = totalValue / 1000
         }
-        return result.toPrecision(4)
+        return result % 1 === 0 ? result : result.toFixed(3)
     }
 
     const onSelectChange = (e) => {
@@ -65,7 +65,7 @@ const TotalList = (props) => {
             <div className='total-list-footer-span-wrapper'>
                 <span className='total-list-footer-total-value' >{finalValue(totalUnit)}</span>
                 <div>
-                    <select name='unit-select' >
+                    <select defaultValue={totalUnit} name='unit-select' >
                         <option value="g">g</option>
                         <option value="kg">kg</option>
                     </select>

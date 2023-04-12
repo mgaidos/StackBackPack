@@ -202,7 +202,8 @@
                 font-size: 0.8rem;
 
                 .category-total-value {
-                    width: 36px;
+                    min-width: 36px;
+                    width: max-content;
                     text-align: right;
                     padding: 8px;
 
