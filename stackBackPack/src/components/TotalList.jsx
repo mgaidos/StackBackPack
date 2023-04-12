@@ -50,6 +50,7 @@ const TotalList = (props) => {
 
         {
             dataForChart.dataSet.map((value, index) => <OneTotalListItem
+                key={index}
                 dataForChart={dataForChart}
                 value={value}
                 label={dataForChart.labels[index]}

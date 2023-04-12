@@ -5,17 +5,30 @@ const Graph = (props) => {
 
     const { dataForChart } = props
 
-    const chartRef = useRef(null);
+    const chartRef = useRef(null)
+
 
     const data = {
         labels: dataForChart.labels,
         datasets: [{
-            label: 'Your Data',
+            
             data: dataForChart.dataSet,
             backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
+                "#003f5c",
+                "#2f4b7c",
+                "#665191",
+                "#a05195",
+                "#d45087",
+                "#f95d6a",
+                "#ff7c43",
+                "#ffa600",
+                "#8FB7B4",
+                "#C6DEB7",
+                "#F6EDD1",
+                "#F5B895",
+                "#F492B4",
+                "#B2B2B2",
+                "#52656B"
             ],
             hoverOffset: 10
         }]
