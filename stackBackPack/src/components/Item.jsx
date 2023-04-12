@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { debounce } from 'lodash-es'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { Reorder } from "framer-motion"
 
 //styles
 import './Item.scss'
@@ -20,7 +21,8 @@ const Item = (props) => {
         weight,
         unit,
         items,
-        setItems
+        setItems,
+        value
     }
         = props
 
@@ -39,7 +41,7 @@ const Item = (props) => {
 
     }, [items])
 
-  
+
     const handleChangeOnInputs = debounce((e, id) => {
 
         setIdOfSelectedItem(id)
@@ -121,27 +123,31 @@ const Item = (props) => {
 
 
 
-    return <li className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
-        <div className='category-li-items'>
-            <div className='item-name-description'>
-                <input type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
-                <input type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
-            </div>
-            <div className='item-quantity-weight'>
-                <input type="number" min={0} name='item-pcs' defaultValue={quantity ? quantity : 0} placeholder='pcs' className='input-qty' />
-                <div className='select-weight'>
-                    <input type="number" min={0} name='item-weight' defaultValue={weight ? weight : 0} placeholder='0' />
-                    <select defaultValue={unit} name='item-unit' id='unit-of-weight'>
-                        <option value="g">g</option>
-                        <option value="kg">kg</option>
-                    </select>
+    return <Reorder.Item
 
+        value={value}
+    >
+        <ul className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
+            <div className='category-li-items'>
+                <div className='item-name-description'>
+                    <input type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
+                    <input type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
                 </div>
-                <button className='delete-item-button' id={id} onClick={handleDeleteItemClick}>X</button>
-            </div>
-        </div>
-    </li>
+                <div className='item-quantity-weight'>
+                    <input type="number" min={0} name='item-pcs' defaultValue={quantity ? quantity : 0} placeholder='pcs' className='input-qty' />
+                    <div className='select-weight'>
+                        <input type="number" min={0} name='item-weight' defaultValue={weight ? weight : 0} placeholder='0' />
+                        <select defaultValue={unit} name='item-unit' id='unit-of-weight'>
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                        </select>
 
+                    </div>
+                    <button className='delete-item-button' id={id} onClick={handleDeleteItemClick}>X</button>
+                </div>
+            </div>
+        </ul>
+    </Reorder.Item>
 
     {
         /*

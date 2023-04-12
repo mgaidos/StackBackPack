@@ -3,6 +3,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { Reorder } from "framer-motion"
 
 
 
@@ -44,11 +45,14 @@ const Category = (props) => {
     const [totalPcsInCatgeory, setTotalPcsInCatgeory] = useState('')
 
 
+    const [itemsOfOneCategory, setItemsOfOneCategory] = useState([])
+
+
 
 
     useEffect(() => {
-        console.log(actualCategoryNameValue)
-    }, [actualCategoryNameValue])
+        console.log(itemsOfOneCategory)
+    }, [itemsOfOneCategory])
 
     useEffect(() => {
         setActualCategoryNameValue(value)
@@ -57,6 +61,7 @@ const Category = (props) => {
     useEffect(() => {
         sumWeights(categoryId, setTotalCategoryWeight)
         sumPcs(categoryId, setTotalPcsInCatgeory)
+        setItemsOfOneCategory(items.filter(item => item._idOfCategory == categoryId))
     }, [items, totalUnit])
 
     const { userId } = useParams()
@@ -169,6 +174,66 @@ const Category = (props) => {
 
     }
 
+    const updateItemsOrder = (newOrder) => {
+        //Todo funkce která updatuje pořadí items v databázi
+    }
+
+    const handleReorder = (newOrder) => {
+        console.log("reorderiiing")
+        setItemsOfOneCategory(newOrder)
+    }
+
+
+    return <li className='category-wrapper' onClick={() => { handleClickOnCategory(categoryId) }} >
+        <ul className='category-ul'>
+            <li className='category-li-descriptions'>
+                <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' />
+                <div className='qt-weight'>
+                    <span className='qty-span-cell'>Qantity</span>
+                    <span className='weight-span-cell'>Weight</span>
+                    <button className='delete-category-button' name={categoryId} onClick={handleDeleteCategoryClick}>X</button>
+                </div>
+            </li>
+
+
+            <Reorder.Group axis='y' values={itemsOfOneCategory} onReorder={handleReorder}>
+                {itemsOfOneCategory.map(item => {
+                    return <Item
+                        value={item}
+                        id={item._id}
+                        key={item._id}
+                        itemName={item.itemName}
+                        itemDescription={item.itemDescription}
+                        quantity={item.quantity}
+                        weight={item.weight}
+                        unit={item.unit}
+                        handleDeleteItemClick={handleDeleteItemClick}
+                        items={items}
+                        setItems={setItems}
+                        idOfSelectedList={idOfSelectedList}
+                        idOfSelectedCategory={idOfSelectedCategory} />
+
+                })}
+            </Reorder.Group>
+
+
+            <li className='category-total'>
+                <div className='category-total-help-div'></div>
+                <div className='category-total-wrapper-div'>
+                    <div><span className='category-total-qty'>{totalPcsInCatgeory}</span></div>
+                    <div className='category-total-weight'>
+                        <span className='category-total-value'>{totalCategoryWeight % 1 === 0 ? totalCategoryWeight : totalCategoryWeight.toFixed(3)}</span>
+                        <span className='category-total-unit'>{totalUnit}</span>
+                    </div>
+                    <span className='category-total-help-span'></span>
+                </div>
+            </li>
+        </ul>
+
+        {actualCategoryNameValue ? <button id={categoryId} className='add-item-button' onClick={handleClickOnAddItem}>Add item</button> : ''}
+    </li>
+
+    /*
 
     return <li className='category-wrapper' onClick={() => { handleClickOnCategory(categoryId) }} >
         <ul className='category-ul'>
@@ -213,6 +278,8 @@ const Category = (props) => {
 
         {actualCategoryNameValue ? <button id={categoryId} className='add-item-button' onClick={handleClickOnAddItem}>Add item</button> : ''}
     </li>
+    
+    */
 
 }
 
