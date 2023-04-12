@@ -20,8 +20,7 @@ const Item = (props) => {
         weight,
         unit,
         items,
-        setItems,
-        setItemUnit
+        setItems
     }
         = props
 
@@ -85,7 +84,7 @@ const Item = (props) => {
                     :
                     oneItem))
 
-            setItemUnit(e.target.value)
+            
 
         }
 

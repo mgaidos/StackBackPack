@@ -33,9 +33,7 @@ const Category = (props) => {
         listsInDb,
         sumWeights,
         sumPcs,
-        totalUnit,
-        setItemUnit,
-        itemUnit
+        totalUnit
     }
         = props
 
@@ -59,7 +57,7 @@ const Category = (props) => {
     useEffect(() => {
         sumWeights(categoryId, setTotalCategoryWeight)
         sumPcs(categoryId, setTotalPcsInCatgeory)
-    }, [items, totalUnit, itemUnit])
+    }, [items, totalUnit])
 
     const { userId } = useParams()
 
@@ -197,7 +195,6 @@ const Category = (props) => {
                     setItems={setItems}
                     idOfSelectedList={idOfSelectedList}
                     idOfSelectedCategory={idOfSelectedCategory}
-                    setItemUnit={setItemUnit}
 
                 />
             })}
@@ -206,7 +203,7 @@ const Category = (props) => {
                 <div className='category-total-wrapper-div'>
                     <div><span className='category-total-qty'>{totalPcsInCatgeory}</span></div>
                     <div className='category-total-weight'>
-                        <span className='category-total-value'>{totalCategoryWeight}</span>
+                        <span className='category-total-value'>{totalCategoryWeight.toPrecision(4)}</span>
                         <span className='category-total-unit'>{totalUnit}</span>
                     </div>
                     <span className='category-total-help-span'></span>

@@ -24,7 +24,7 @@ const TotalList = (props) => {
         if (totalUnit === 'kg') {
             result = totalValue / 1000
         }
-        return result
+        return result.toPrecision(4)
     }
 
     const onSelectChange = (e) => {

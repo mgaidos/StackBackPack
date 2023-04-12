@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const authenticateToken = (req, res, next) => {
 
-    console.log('jsem v auth')
+    //console.log('jsem v auth')
     //console.log(req.headers['authorization'])
     const authHeader = req.headers['authorization']
     //console.log(authHeader)
