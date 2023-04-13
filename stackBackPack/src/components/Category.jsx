@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Reorder } from "framer-motion"
+import { debounce, indexOf } from 'lodash-es'
 
 
 
@@ -43,10 +44,19 @@ const Category = (props) => {
 
     const [totalCategoryWeight, setTotalCategoryWeight] = useState(0)
     const [totalPcsInCatgeory, setTotalPcsInCatgeory] = useState('')
-
-
     const [itemsOfOneCategory, setItemsOfOneCategory] = useState([])
+    const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState(null)
 
+    const updateTimeout = useRef(null)
+
+
+    useEffect(() => {
+        return () => {
+            if (updateTimeout.current) {
+                clearTimeout(updateTimeout.current)
+            }
+        }
+    }, [])
 
 
 
@@ -54,11 +64,14 @@ const Category = (props) => {
         console.log(itemsOfOneCategory)
     }, [itemsOfOneCategory])
 
+
     useEffect(() => {
         setActualCategoryNameValue(value)
     }, [])
 
+
     useEffect(() => {
+        console.log(items)
         sumWeights(categoryId, setTotalCategoryWeight)
         sumPcs(categoryId, setTotalPcsInCatgeory)
         setItemsOfOneCategory(items.filter(item => item._idOfCategory == categoryId))
@@ -71,10 +84,10 @@ const Category = (props) => {
         console.log(e.target.value)
     }
 
-    const updateCategoryNameInDb = async (idOfSelectedList, clickedCategory, newCategoryName) => {
+    const updateCategoryNameInDb = (idOfSelectedList, clickedCategory, newCategoryName) => {
 
         const accessToken = localStorage.getItem('token')
-        await axios.put(`http://localhost:3000/dashboard/${userId}`, {
+        axios.put(`http://localhost:3000/dashboard/${userId}`, {
             idOfSelectedList, clickedCategory, newCategoryName
         }, {
             headers: {
@@ -174,13 +187,53 @@ const Category = (props) => {
 
     }
 
+
+
     const updateItemsOrder = (newOrder) => {
-        //Todo funkce která updatuje pořadí items v databázi
+
+        console.log(newOrder)
+        console.log("updatuju databazi")
+        console.log("id category" + idOfSelectedCategory)
+
+        const clickedCategory = categoryId
+
+        const accessToken = localStorage.getItem('token')
+        axios.put(`http://localhost:3000/dashboard/${userId}`, {
+            idOfSelectedList, clickedCategory, newOrder
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Custom-Header': 'updateItemsOrder',
+                'Authorization': accessToken
+            }
+        })
+            .then(response => {
+                const data = response.data
+                console.log(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
     }
 
     const handleReorder = (newOrder) => {
-        console.log("reorderiiing")
+   
         setItemsOfOneCategory(newOrder)
+
+
+
+        if (updateTimeout.current) {
+            clearTimeout(updateTimeout.current)
+        }
+
+        updateTimeout.current = setTimeout(() => {
+            if (lastUpdateTimestamp === null || Date.now() - lastUpdateTimestamp >= 3000) {
+                updateItemsOrder(newOrder)
+                setLastUpdateTimestamp(Date.now())
+            }
+
+        }, 3000)
     }
 
 
@@ -196,7 +249,7 @@ const Category = (props) => {
             </li>
 
 
-            <Reorder.Group axis='y' values={itemsOfOneCategory} onReorder={handleReorder}>
+            <Reorder.Group axis='y' values={itemsOfOneCategory} onReorder={debounce((newOrder) => { handleReorder(newOrder) }, 0.200)}>
                 {itemsOfOneCategory.map(item => {
                     return <Item
                         value={item}
@@ -211,7 +264,9 @@ const Category = (props) => {
                         items={items}
                         setItems={setItems}
                         idOfSelectedList={idOfSelectedList}
-                        idOfSelectedCategory={idOfSelectedCategory} />
+                        idOfSelectedCategory={idOfSelectedCategory}
+
+                    />
 
                 })}
             </Reorder.Group>

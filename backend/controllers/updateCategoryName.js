@@ -6,7 +6,7 @@ const updateCategoryName = async (req, res) => {
     const { idOfSelectedList, clickedCategory, newCategoryName } = req.body
     console.log(idOfSelectedList)
     console.log(clickedCategory)
-    console.log(newCategoryName)
+    //console.log(newCategoryName)
 
     //console.log(await UserData.findById(idOfSelectedList))
 try {

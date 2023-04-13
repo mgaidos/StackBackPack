@@ -22,7 +22,8 @@ const Item = (props) => {
         unit,
         items,
         setItems,
-        value
+        value,
+        handleOnMouseUp
     }
         = props
 
@@ -43,7 +44,6 @@ const Item = (props) => {
 
 
     const handleChangeOnInputs = debounce((e, id) => {
-
         setIdOfSelectedItem(id)
 
         const changingInput = e.target.name
@@ -94,7 +94,7 @@ const Item = (props) => {
 
         setUpdatingItems(true)
 
-    }, 1000)
+    }, 500)
 
     const updateItem = () => {
         const updatedItem = items.filter(oneItem => oneItem._id == idOfSelectedItem)
@@ -127,7 +127,7 @@ const Item = (props) => {
 
         value={value}
     >
-        <ul className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
+        <ul className='category-ul-items'  onChange={(e) => handleChangeOnInputs(e, id)} >
             <div className='category-li-items'>
                 <div className='item-name-description'>
                     <input type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />

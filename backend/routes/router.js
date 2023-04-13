@@ -15,6 +15,7 @@ const deleteCategory = require('../controllers/deleteCategory')
 const newItem = require('../controllers/newItem')
 const deleteItem = require('../controllers/deleteItem')
 const updateItem = require('../controllers/updateItem')
+const updateItemsOrder = require('../controllers/updateItemsOrder')
 
 router.route('/register').post(register)
 
@@ -27,10 +28,14 @@ router.post('/login', (req, res) => login(req, res))
 /* Handling many put requests to one url using custom header */
 router.put('/dashboard/:id', (req, res) => {
     const customHeader = req.headers['custom-header']
-    console.log(customHeader)
+    //console.log(customHeader)
 
-    if (customHeader === "updateCategoryName") {
+    if (customHeader === 'updateCategoryName') {
         updateCategoryName(req, res)
+    }
+
+    if (customHeader === 'updateItemsOrder') {
+        updateItemsOrder(req, res)
     }
 
     if (customHeader === 'updateListName') {
