@@ -67,7 +67,7 @@ const OneList = (props) => {
 
       const accessToken = localStorage.getItem('token')
 
-      axios.put(`http://localhost:3000/dashboard/${userId}`, {
+      axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
         _id, newName, shareUrl
       }, {
         headers: {
@@ -101,7 +101,7 @@ const OneList = (props) => {
       const accessToken = localStorage.getItem('token')
       const listName = e.target.value
 
-      axios.post(`http://localhost:3000/dashboard/${userId}`, {
+      axios.post(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
         _id, user, listName, shareUrl
       }, {
         headers: {
@@ -138,7 +138,7 @@ const OneList = (props) => {
     //console.log(removedListId)
     const accessToken = localStorage.getItem('token')
 
-    axios.delete(`http://localhost:3000/dashboard/${userId}`, {
+    axios.delete(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
       headers: {
         'Content-Type': 'application/json',
         'Custom-Header': 'deleteList',

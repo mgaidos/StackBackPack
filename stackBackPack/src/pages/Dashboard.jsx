@@ -59,7 +59,7 @@ const Dashboard = (props) => {
 
 
         if (!isSharedList) {
-            axios.get(`http://localhost:3000/dashboard/${userId}`, {
+            axios.get(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Custom-Header': 'fetchingUserLists',
@@ -92,7 +92,7 @@ const Dashboard = (props) => {
                     setAuthenticated(false)
                 })
         } else {
-            axios.get(`http://localhost:3000/dashboard/${userId}`, {
+            axios.get(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Custom-Header': 'fetchingUserLists-shared',
@@ -276,7 +276,7 @@ const Dashboard = (props) => {
         setItems(filteredItems)
         const accessToken = localStorage.getItem('token')
 
-        axios.delete(`http://localhost:3000/dashboard/${userId}`, {
+        axios.delete(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
 
             headers: {
                 'Content-Type': 'application/json',
@@ -307,7 +307,7 @@ const Dashboard = (props) => {
         const removedCategoryId = e.target.name
         //console.log(e.target.name)
         const accessToken = localStorage.getItem('token')
-        axios.delete(`http://localhost:3000/dashboard/${userId}`, {
+        axios.delete(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Custom-Header': 'deleteCategory',
@@ -339,7 +339,7 @@ const Dashboard = (props) => {
 
     const saveItemToDb = (idOfList, idOfCategory, savingItem) => {
         const accessToken = localStorage.getItem('token')
-        axios.post(`http://localhost:3000/dashboard/${userId}`, {
+        axios.post(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             idOfList, idOfCategory, savingItem
         }, {
             headers: {

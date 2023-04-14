@@ -88,7 +88,7 @@ const Category = (props) => {
     const updateCategoryNameInDb = (idOfSelectedList, clickedCategory, newCategoryName) => {
 
         const accessToken = localStorage.getItem('token')
-        axios.put(`http://localhost:3000/dashboard/${userId}`, {
+        axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             idOfSelectedList, clickedCategory, newCategoryName
         }, {
             headers: {
@@ -111,7 +111,7 @@ const Category = (props) => {
 
         const accessToken = localStorage.getItem('token')
         console.log(savingCategory)
-        axios.post(`http://localhost:3000/dashboard/${userId}`, {
+        axios.post(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             savingCategory
         }, {
             headers: {
@@ -199,7 +199,7 @@ const Category = (props) => {
         const clickedCategory = categoryId
 
         const accessToken = localStorage.getItem('token')
-        axios.put(`http://localhost:3000/dashboard/${userId}`, {
+        axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             idOfSelectedList, clickedCategory, newOrder
         }, {
             headers: {

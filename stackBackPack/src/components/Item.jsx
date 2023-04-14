@@ -106,7 +106,7 @@ const Item = (props) => {
 
         console.log("updatuju")
 
-        axios.put(`http://localhost:3000/dashboard/${userId}`, {
+        axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             idOfSelectedList, idOfSelectedCategory, updatedItem
         }, {
             headers: {

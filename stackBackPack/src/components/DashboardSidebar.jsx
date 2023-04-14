@@ -42,7 +42,7 @@ const DashboardSidebar = (props) => {
                     _id: listId,
                     value: '',
                     type: 'text',
-                    shareUrl: `127.0.0.1:5173/my-list/${userId}/${listId}`
+                    shareUrl: `https://stackbackpack.onrender.com/my-list/${userId}/${listId}`
                 }]
             )
     }
