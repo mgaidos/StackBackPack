@@ -18,9 +18,10 @@ const Home = () => {
             <article className='home-article'>
                 <div className='article-1'>
                     <ul>
-                        <li>Step one - Register</li>
-                        <li>Step two - Login</li>
-                        <li>Step three - Add new list</li>
+                        <li>Register</li>
+                        <li>Login</li>
+                        <li>Create list</li>
+                        <li>Share it</li>
                     </ul>
                 </div>
                 <div className='article-2'>

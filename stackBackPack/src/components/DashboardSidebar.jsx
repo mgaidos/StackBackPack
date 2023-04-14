@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Reorder } from "framer-motion"
+import { v4 as uuidv4 } from 'uuid';
+
 
 //components
 import OneList from './OneList'
@@ -23,18 +25,26 @@ const DashboardSidebar = (props) => {
         lists,
         listsInDb,
         setLists,
-        createNewCategory
+        createNewCategory,
+        userId
     } = props
 
     const createNewList = () => {
-        setLists(
-            [...lists,
-            {
-                _id: new Date().getTime(),
-                value: '',
-                type: 'text'
-            }]
-        )
+        /*
+                const randomUrl = uuidv4().slice(0, 8)
+                console.log(randomUrl)
+        */
+
+        const listId = new Date().getTime()
+            setLists(
+                [...lists,
+                {
+                    _id: listId,
+                    value: '',
+                    type: 'text',
+                    shareUrl: `127.0.0.1:5173/my-list/${userId}/${listId}`
+                }]
+            )
     }
 
     const handleClickCreateNewList = () => {
@@ -52,6 +62,7 @@ const DashboardSidebar = (props) => {
                     key={oneList._id}
                     id={oneList._id}
                     value={oneList.listName}
+                    shareUrl={oneList.shareUrl}
                     type='text'
                     name={'new-list-input'}
                     idOfselectedList={idOfselectedList}

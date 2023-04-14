@@ -24,7 +24,8 @@ const OneList = (props) => {
     value,
     type,
     name,
-    createNewCategory
+    createNewCategory,
+    shareUrl
   } = props
 
   const [listNameExist, setListNameExist] = useState(false)
@@ -67,7 +68,7 @@ const OneList = (props) => {
       const accessToken = localStorage.getItem('token')
 
       axios.put(`http://localhost:3000/dashboard/${userId}`, {
-        _id, newName
+        _id, newName, shareUrl
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +102,7 @@ const OneList = (props) => {
       const listName = e.target.value
 
       axios.post(`http://localhost:3000/dashboard/${userId}`, {
-        _id, user, listName
+        _id, user, listName, shareUrl
       }, {
         headers: {
           'Content-Type': 'application/json',

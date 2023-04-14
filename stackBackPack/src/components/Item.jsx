@@ -23,7 +23,8 @@ const Item = (props) => {
         items,
         setItems,
         value,
-        handleOnMouseUp
+        handleOnMouseUp,
+        isSharedList
     }
         = props
 
@@ -92,7 +93,9 @@ const Item = (props) => {
 
         }
 
-        setUpdatingItems(true)
+       
+       
+       isSharedList ? '' : setUpdatingItems(true)
 
     }, 500)
 
@@ -127,23 +130,23 @@ const Item = (props) => {
 
         value={value}
     >
-        <ul className='category-ul-items'  onChange={(e) => handleChangeOnInputs(e, id)} >
+        <ul className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
             <div className='category-li-items'>
                 <div className='item-name-description'>
-                    <input type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
-                    <input type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
+                    <input className={isSharedList ? 'read-only' : ''} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
+                    <input className={isSharedList ? 'read-only' : ''} type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
                 </div>
                 <div className='item-quantity-weight'>
-                    <input type="number" min={0} name='item-pcs' defaultValue={quantity ? quantity : 0} placeholder='pcs' className='input-qty' />
+                    <input className={isSharedList ? 'read-only input-qty' : 'input-qty'} type="number" min={0} name='item-pcs' defaultValue={quantity ? quantity : 0} placeholder='pcs' />
                     <div className='select-weight'>
-                        <input type="number" min={0} name='item-weight' defaultValue={weight ? weight : 0} placeholder='0' />
+                        <input className={isSharedList ? 'read-only' : ''} type="number" min={0} name='item-weight' defaultValue={weight ? weight : 0} placeholder='0' />
                         <select defaultValue={unit} name='item-unit' id='unit-of-weight'>
                             <option value="g">g</option>
                             <option value="kg">kg</option>
                         </select>
 
                     </div>
-                    <button className='delete-item-button' id={id} onClick={handleDeleteItemClick}>X</button>
+                    {isSharedList ? '' : <button className='delete-item-button' id={id} onClick={handleDeleteItemClick}>X</button>}
                 </div>
             </div>
         </ul>

@@ -35,7 +35,8 @@ const Category = (props) => {
         listsInDb,
         sumWeights,
         sumPcs,
-        totalUnit
+        totalUnit,
+        isSharedList
     }
         = props
 
@@ -229,7 +230,7 @@ const Category = (props) => {
 
         updateTimeout.current = setTimeout(() => {
             if (lastUpdateTimestamp === null || Date.now() - lastUpdateTimestamp >= 3000) {
-                updateItemsOrder(newOrder)
+                isSharedList ? '' : updateItemsOrder(newOrder)
                 setLastUpdateTimestamp(Date.now())
             }
 
@@ -240,11 +241,19 @@ const Category = (props) => {
     return <li className='category-wrapper' onClick={() => { handleClickOnCategory(categoryId) }} >
         <ul className='category-ul'>
             <li className='category-li-descriptions'>
-                <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' />
+                {
+                    isSharedList
+                    ?
+                    <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' readOnly />
+                    :
+                    <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' />
+
+                }
+                
                 <div className='qt-weight'>
                     <span className='qty-span-cell'>Qantity</span>
                     <span className='weight-span-cell'>Weight</span>
-                    <button className='delete-category-button' name={categoryId} onClick={handleDeleteCategoryClick}>X</button>
+                    {isSharedList ? '' :<button className='delete-category-button' name={categoryId} onClick={handleDeleteCategoryClick}>X</button>}
                 </div>
             </li>
 
@@ -265,6 +274,7 @@ const Category = (props) => {
                         setItems={setItems}
                         idOfSelectedList={idOfSelectedList}
                         idOfSelectedCategory={idOfSelectedCategory}
+                        isSharedList={isSharedList}
 
                     />
 
@@ -280,12 +290,12 @@ const Category = (props) => {
                         <span className='category-total-value'>{totalCategoryWeight % 1 === 0 ? totalCategoryWeight : totalCategoryWeight.toFixed(3)}</span>
                         <span className='category-total-unit'>{totalUnit}</span>
                     </div>
-                    <span className='category-total-help-span'></span>
+                    {isSharedList ? '' : <span className='category-total-help-span'></span>}
                 </div>
             </li>
         </ul>
 
-        {actualCategoryNameValue ? <button id={categoryId} className='add-item-button' onClick={handleClickOnAddItem}>Add item</button> : ''}
+        {actualCategoryNameValue && !isSharedList ? <button id={categoryId} className='add-item-button' onClick={handleClickOnAddItem}>Add item</button> : ''}
     </li>
 
     /*

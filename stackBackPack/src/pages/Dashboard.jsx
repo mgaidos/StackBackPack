@@ -13,12 +13,14 @@ import DashboardData from '../components/DashboardData'
 //styles
 import './Dashboard.scss'
 
+
 const Dashboard = (props) => {
-const { setLoggedIn } = props
- 
+    const { setLoggedIn, isSharedList, listId } = props
+
 
     //states
     const [authenticated, setAuthenticated] = useState(true)
+
 
     const [lists, setLists] = useState([])
     const [categories, setCategories] = useState([])
@@ -26,61 +28,110 @@ const { setLoggedIn } = props
     const [listsInDb, setListsInDb] = useState([])
 
     const [actualListNameValue, setActualListNameValue] = useState('')
-    
-    
 
-    const [idOfSelectedList, setIdOfSelectedList] = useState('')
+
+
+    const [idOfSelectedList, setIdOfSelectedList] = useState(listId ? listId : '')
     const [idOfSelectedCategory, setIdOfSelectedCategory] = useState('')
-    
+
 
     const [addingItems, setAddingItems] = useState(false)
-   
+
     //const [updatingItems, setUpdatingItems] = useState(false)
 
     const [dashboardDataHeading, setDashboardDataHeading] = useState('')
+    const [shareUrl, setShareUrl] = useState('')
 
+ 
 
     //params
     const { userId } = useParams()
 
-      /* fetching users lists */
+    console.log(userId)
+
+    /* fetching users lists */
     useEffect(() => {
+
+        console.log(typeof idOfSelectedList)
         const accessToken = localStorage.getItem('token')
         console.log("tady tokeen")
         console.log(accessToken)
-    
-        axios.get(`http://localhost:3000/dashboard/${userId}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Custom-Header': 'fetchingUserLists',
-                'Authorization' : accessToken
 
-            }
-        })
-            .then(response => {
-                console.log("JSEM V RESPONSEEEEEEEEE")
-                const data = response.data.result
-                
 
-                setLists(
-                    ...lists,
-                    data
-                )
-                const cat = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object'))
+        if (!isSharedList) {
+            axios.get(`http://localhost:3000/dashboard/${userId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Custom-Header': 'fetchingUserLists',
+                    'Authorization': accessToken
 
-                const items = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object').flatMap(category => category.items.filter(obj => typeof obj === 'object')))
-
-                setCategories(cat)
-                setItems(items)
-                setListsInDb(data)
-                setLoggedIn(true)
+                }
             })
-            .catch(err => {
-                console.log(err)
-                setAuthenticated(false)
+                .then(response => {
+                    console.log("JSEM V RESPONSEEEEEEEEE")
+                    const data = response.data.result
+
+
+                    setLists(
+                        ...lists,
+                        data
+                    )
+                    const cat = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object'))
+
+                    const items = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object').flatMap(category => category.items.filter(obj => typeof obj === 'object')))
+
+                    
+                    
+                    setCategories(cat)
+                    setItems(items)
+                    setListsInDb(data)
+                    setLoggedIn(true)
+                })
+                .catch(err => {
+                    console.log(err)
+                    setAuthenticated(false)
+                })
+        } else {
+            axios.get(`http://localhost:3000/dashboard/${userId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Custom-Header': 'fetchingUserLists-shared',
+
+                }
             })
+                .then(response => {
+                    console.log("JSEM V RESPONSEEEEEEEEE")
+                    const data = response.data.result
+
+                    console.log(data)
+                    setLists(
+                        ...lists,
+                        data
+                    )
+                    const cat = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object'))
+
+                    const items = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object').flatMap(category => category.items.filter(obj => typeof obj === 'object')))
+
+                    const name = data.filter(list => list._id == listId)[0].listName
+                    
+                    
+
+                    setActualListNameValue(name)
+                    setDashboardDataHeading(name)
+
+                    setCategories(cat)
+                    setItems(items)
+                    setListsInDb(data)
+                    setLoggedIn(true)
+                })
+                .catch(err => {
+                    console.log(err)
+                    setAuthenticated(false)
+                })
+        }
+
     }, [])
- 
+
 
     useEffect(() => {
         console.log(idOfSelectedCategory)
@@ -101,16 +152,35 @@ const { setLoggedIn } = props
     }, [categories])
 
     useEffect(() => {
-        console.log(idOfSelectedList)
+        if(!isSharedList) {
+            let url
+
+            if(idOfSelectedList) {
+                url = lists.filter(oneList => oneList._id == idOfSelectedList)[0].shareUrl
+                console.log(url)
+                setShareUrl(url)
+            }
+
+            console.log(idOfSelectedList)
+        }
+        
     }, [idOfSelectedList])
 
 
 
-  
+
 
     useEffect(() => {
         console.log(lists)
+
+
+        console.log(name)
+
+
+
     }, [lists])
+
+
 
     useEffect(() => {
         console.log(listsInDb)
@@ -138,7 +208,7 @@ const { setLoggedIn } = props
 
                 }
                 ])
-                
+
 
 
         }
@@ -211,7 +281,7 @@ const { setLoggedIn } = props
             headers: {
                 'Content-Type': 'application/json',
                 'Custom-Header': 'deleteItem',
-                'Authorization' : accessToken
+                'Authorization': accessToken
             },
             data: {
                 idOfSelectedList: idOfSelectedList,
@@ -241,7 +311,7 @@ const { setLoggedIn } = props
             headers: {
                 'Content-Type': 'application/json',
                 'Custom-Header': 'deleteCategory',
-                'Authorization' : accessToken
+                'Authorization': accessToken
             },
             data: {
                 removedCategoryId: removedCategoryId,
@@ -275,7 +345,7 @@ const { setLoggedIn } = props
             headers: {
                 'Content-Type': 'application/json',
                 'Custom-Header': 'newItem',
-                'Authorization' : accessToken
+                'Authorization': accessToken
             }
         })
 
@@ -303,7 +373,7 @@ const { setLoggedIn } = props
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.25 }}
             >
-                <DashboardSidebar
+                {!isSharedList ? <DashboardSidebar
                     lists={lists}
                     setLists={setLists}
                     listsInDb={listsInDb}
@@ -312,7 +382,8 @@ const { setLoggedIn } = props
                     createNewCategory={createNewCategory}
                     actualListNameValue={actualListNameValue}
                     setActualListNameValue={setActualListNameValue}
-                />
+                    userId={userId}
+                /> : null}
                 <DashboardData
                     dashboardDataHeading={dashboardDataHeading}
                     idOfSelectedList={idOfSelectedList}
@@ -329,7 +400,10 @@ const { setLoggedIn } = props
                     idOfSelectedCategory={idOfSelectedCategory}
                     actualListNameValue={actualListNameValue}
                     lists={lists}
-            
+                    isSharedList={isSharedList}
+                    shareUrl={shareUrl}
+                    
+
                 />
 
             </motion.main>

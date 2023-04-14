@@ -12,6 +12,13 @@
     font-size: 0.8rem;
 }
 
+@mixin readOnly () {
+        border: none;
+        background-color: transparent;
+        pointer-events: none;
+    
+}
+
 @mixin deleteButton () {
         
         text-decoration: none;

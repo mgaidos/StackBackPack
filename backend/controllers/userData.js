@@ -3,7 +3,7 @@ const CategoriesSchema = require('../models/userDataModel')
 const ItemsSchema = require('../models/userDataModel')
 
 const userData = async (req, res) => {
-    const { _id, user, listName } = req.body
+    const { _id, user, listName, shareUrl } = req.body
     
     //Creating new list
 
@@ -16,7 +16,8 @@ const userData = async (req, res) => {
         const newUserData = new UserData({
             _id,
             user,
-            listName
+            listName,
+            shareUrl
         })
 
         await newUserData.save()

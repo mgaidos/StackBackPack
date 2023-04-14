@@ -86,6 +86,10 @@
                     input[name='Item description'] {
                         flex: 2;
                     }
+
+                    .read-only {
+                        @include readOnly
+                    }
                 }
 
                 .item-quantity-weight {
@@ -93,6 +97,10 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+
+                    .read-only {
+                        @include readOnly
+                    }
 
                     .input-qty {
                         width: 4rem;
@@ -221,7 +229,7 @@
             .category-total-help-span {
                 min-width: 22.5px;
                 height: 100%;
-            
+
             }
 
         }

@@ -74,6 +74,11 @@ const userDataSchema = Schema({
     type: String,
     required: false
   },
+  
+  shareUrl: {
+    type: String,
+    required: false
+  },
 
   listCategories: [categoriesSchema]
 

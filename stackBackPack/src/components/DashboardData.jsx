@@ -34,7 +34,9 @@ const DashboardData = (props) => {
     items,
     setItems,
     listsInDb,
-    lists
+    lists,
+    isSharedList,
+    shareUrl
   } = props
 
   const [dataForChart, setDataForChart] = useState({
@@ -54,6 +56,10 @@ const DashboardData = (props) => {
   useEffect(() => {
     console.log(totalUnit)
   }, [totalUnit])
+
+  useEffect(() => {
+    console.log(shareUrl)
+  }, [shareUrl])
 
 
   useEffect(() => {
@@ -84,7 +90,7 @@ const DashboardData = (props) => {
         }
 
         const existingItem = accumulator.find((item) => item._idOfCategory == currentValue._idOfCategory)
-      
+
         if (existingItem) {
           console.log(existingItem)
           existingItem.totalWeight += value * currentValue.quantity
@@ -106,6 +112,8 @@ const DashboardData = (props) => {
 
     categoriesWeights()
 
+
+
   }, [categories, items, idOfSelectedList])
 
 
@@ -117,7 +125,7 @@ const DashboardData = (props) => {
   //counting the weight of each category
   const sumWeights = (categoryId, setTotalCategoryWeight) => {
     console.log('Počítám items..' + categoryId)
-    
+
     if (items.length > 0) {
       console.log(items.filter(item => item._idOfCategory == categoryId))
       let itemsWeight = items.filter(item => item._idOfCategory == categoryId)
@@ -180,6 +188,8 @@ const DashboardData = (props) => {
 
   return <article className='dashboard-data'>
     <h3>{dashboardDataHeading}</h3>
+
+
     {
       actualListNameValue ?
         <div className='summary-container'>
@@ -196,6 +206,17 @@ const DashboardData = (props) => {
               setTotalUnit={setTotalUnit}
               totalUnit={totalUnit}
             />
+            {
+              isSharedList
+                ?
+                ''
+                :
+                <div className='share-list-wrapper'>
+                  <p>Share your list:</p>
+                  <input defaultValue={shareUrl} type="text" name="" id="" />
+                </div>
+            }
+
           </div>
         </div>
         : ''
@@ -206,6 +227,8 @@ const DashboardData = (props) => {
 
     <ul className='category-list'>
       {actualListNameValue ?
+
+
         /*filters only the categories of the selected list and then maps */
         categories.filter(category => category._idOfList === idOfSelectedList).map(category => {
           return <Category
@@ -227,13 +250,14 @@ const DashboardData = (props) => {
             sumWeights={sumWeights}
             sumPcs={sumPcs}
             totalUnit={totalUnit}
+            isSharedList={isSharedList}
           />
         })
         : ''}
 
 
 
-      {actualListNameValue ? <button
+      {actualListNameValue && !isSharedList ? <button
         className='add-category-button'
         name='add-category-button'
         onClick={handleClickOnAddCategory}

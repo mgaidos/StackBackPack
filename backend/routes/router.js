@@ -50,25 +50,32 @@ router.put('/dashboard/:id', (req, res) => {
 /* Handling many get requests to one url using custom header */
 
 router.get('/dashboard/:id', auth, (req, res) => {
+    7
+
+    /*
+    For request from url to share list
+  
+    if custom-header === 'fetchingUserLists-shared', authentication is skipped
+     */
 
     const customHeader = req.headers['custom-header']
 
     console.log(customHeader)
 
-    if (customHeader === 'fetchingUserLists') {
+    if (customHeader === 'fetchingUserLists' || customHeader === 'fetchingUserLists-shared') {
         getUserLists(req, res)
     }
 })
 
 /* Handling many post requests to one url using custom header */
-router.post('/dashboard/:id',auth , (req, res) => {
+router.post('/dashboard/:id', auth, (req, res) => {
 
     const customHeader = req.headers['custom-header']
-/*
-    if (customHeader === 'login') {
-        login(req, res)
-    }
-*/
+    /*
+        if (customHeader === 'login') {
+            login(req, res)
+        }
+    */
     if (customHeader === 'newCategory') {
         newCategory(req, res)
     }
@@ -77,7 +84,7 @@ router.post('/dashboard/:id',auth , (req, res) => {
         userData(req, res)
     }
 
-    if(customHeader === 'newItem') {
+    if (customHeader === 'newItem') {
         newItem(req, res)
     }
 })
@@ -86,19 +93,19 @@ router.post('/dashboard/:id',auth , (req, res) => {
 
 //router.route('/dashboard/:id').delete(deleteList)
 
-router.delete('/dashboard/:id',auth,  (req, res)=> {
+router.delete('/dashboard/:id', auth, (req, res) => {
     const customHeader = req.headers['custom-header']
     console.log(req.headers)
 
-    if(customHeader === 'deleteList') {
+    if (customHeader === 'deleteList') {
         deleteList(req, res)
     }
 
-    if(customHeader === 'deleteCategory') {
+    if (customHeader === 'deleteCategory') {
         deleteCategory(req, res)
     }
 
-    if(customHeader === 'deleteItem') {
+    if (customHeader === 'deleteItem') {
         deleteItem(req, res)
     }
 })
