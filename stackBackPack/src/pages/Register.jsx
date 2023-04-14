@@ -23,18 +23,20 @@ const Register = () => {
 
 
 
-  return <motion.main
-    initial={{ y: 10, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.25 }} 
-    className='main-register' 
+  return <div className='main-register-container'>
+    <motion.main
+      initial={{ y: 10, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.25 }}
+      className='main-register'
     >
-    <article >
-      <h3>Create an acount</h3>
-    </article>
+      <article >
+        <h3>Create an acount</h3>
+      </article>
 
-    <RegisterForm />
-  </motion.main>
+      <RegisterForm />
+    </motion.main>
+  </div>
 }
 
 export default Register

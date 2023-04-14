@@ -3,17 +3,32 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 
+//Styles
+import './Home.scss'
+
 
 
 const Home = () => {
-    return <motion.main
+    return <motion.main className='main-home'
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.25 }} >
-        <article>
-            <h3>Hi! this app lets you track the weight of your hiking gear.</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ex reprehenderit provident ut quidem architecto ab mollitia quod voluptatibus, eaque, ipsa itaque minus doloribus animi asperiores vero repellat quibusdam. Veniam!</p>
-        </article>
+        <section className='home-container'>
+            <h2 className='home-heading'>Hi! this app will help you keep track of the weight of your hiking gear.</h2>
+            <article className='home-article'>
+                <div className='article-1'>
+                    <ul>
+                        <li>Step one - Register</li>
+                        <li>Step two - Login</li>
+                        <li>Step three - Add new list</li>
+                    </ul>
+                </div>
+                <div className='article-2'>
+                    <img src="src/assets/stb-mini.png" alt="" />
+                </div>
+            </article>
+
+        </section>
     </motion.main>
 
 }

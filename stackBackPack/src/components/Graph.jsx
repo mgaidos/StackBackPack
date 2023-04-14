@@ -11,25 +11,23 @@ const Graph = (props) => {
     const data = {
         labels: dataForChart.labels,
         datasets: [{
-            
+
             data: dataForChart.dataSet,
-            backgroundColor: [
-                "#003f5c",
-                "#2f4b7c",
-                "#665191",
-                "#a05195",
-                "#d45087",
-                "#f95d6a",
-                "#ff7c43",
-                "#ffa600",
-                "#8FB7B4",
-                "#C6DEB7",
-                "#F6EDD1",
-                "#F5B895",
-                "#F492B4",
-                "#B2B2B2",
-                "#52656B"
-            ],
+            backgroundColor: ["#1f77b4",
+                "#ff7f0e",
+                "#2ca02c",
+                "#d62728",
+                "#9467bd",
+                "#8c564b",
+                "#e377c2",
+                "#7f7f7f",
+                "#bcbd22",
+                "#17becf",
+                "#1f77b4",
+                "#ff7f0e",
+                "#2ca02c",
+                "#d62728",
+                "#9467bd"],
             hoverOffset: 10
         }]
     }
