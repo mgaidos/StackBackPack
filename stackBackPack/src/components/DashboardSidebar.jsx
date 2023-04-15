@@ -31,7 +31,7 @@ const DashboardSidebar = (props) => {
                     _id: listId,
                     value: '',
                     type: 'text',
-                    shareUrl: `https://stackbackpack.onrender.com/my-list/${userId}/${listId}`
+                    shareUrl: `https://stackbackpack.netlify.app/my-list/${userId}/${listId}`
                 }]
             )
     }
