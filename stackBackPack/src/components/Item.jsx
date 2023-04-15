@@ -93,9 +93,9 @@ const Item = (props) => {
 
         }
 
-       
-       
-       isSharedList ? '' : setUpdatingItems(true)
+
+
+        isSharedList ? '' : setUpdatingItems(true)
 
     }, 500)
 
@@ -104,7 +104,7 @@ const Item = (props) => {
 
         const accessToken = localStorage.getItem('token')
 
-        console.log("updatuju")
+        //console.log("updating item")
 
         axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             idOfSelectedList, idOfSelectedCategory, updatedItem
@@ -117,7 +117,7 @@ const Item = (props) => {
         })
             .then(response => {
                 const data = response.data
-                console.log(data)
+                //console.log(data)
             })
             .catch(err => {
                 console.log(err)
@@ -153,32 +153,7 @@ const Item = (props) => {
     </Reorder.Item>
 
     {
-        /*
-    
-        <ul className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
-            <li className='category-li-items'>
-                <div className='item-name-description'>
-                    <input type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
-                    <input type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
-                </div>
-                <div className='item-quantity-weight'>
-                    <input type="number" min={0} name='item-pcs' defaultValue={quantity} placeholder='pcs' className='item-1' />
-                    <div className='item-2'>
-                        <input type="number" min={0} name='item-weight' defaultValue={weight} placeholder='0' />
-                        <select defaultValue={unit} name='item-unit' id='unit-of-weight'>
-                            <option value="g">g</option>
-                            <option value="kg">kg</option>
-                        </select>
-                        <button id={id} onClick={handleDeleteItemClick}>X</button>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    
-    
-    
-    
-    */
+
     }
 
 

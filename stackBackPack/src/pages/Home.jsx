@@ -25,7 +25,7 @@ const Home = () => {
                     </ul>
                 </div>
                 <div className='article-2'>
-                    <img src="src/assets/stb-mini.png" alt="" />
+                    <img src="./assets/stb-mini.png" alt="" />
                 </div>
             </article>
 

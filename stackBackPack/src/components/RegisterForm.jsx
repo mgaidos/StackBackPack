@@ -48,7 +48,7 @@ const RegisterForm = () => {
 
 
       const data = await res.json()
-      console.log(data)
+      //console.log(data)
       setDbEmailErr(data.message ===
         'This email is already registered'
         ?
@@ -57,7 +57,7 @@ const RegisterForm = () => {
         ''
       )
 
-      console.log(dbEmailErr.length)
+      //console.log(dbEmailErr.length)
       
         if (data.message === 'This email is already registered') {
           return
@@ -65,11 +65,7 @@ const RegisterForm = () => {
           navigate('/login')
         }
       
-
-
       //After successful registration you will be redirect to login
-
-
 
     } catch (err) {
       console.log(err);
@@ -123,7 +119,7 @@ const RegisterForm = () => {
   return <form
     className='register-form'
     onSubmit={handleSubmit}
-  //noValidate
+  
   >
 
     {inputs.map((input) => (
@@ -144,7 +140,7 @@ const RegisterForm = () => {
             ...values,
             [input.name]: e.target.value
           })
-          console.log(values.email)
+          //console.log(values.email)
         }}
       />
     ))}

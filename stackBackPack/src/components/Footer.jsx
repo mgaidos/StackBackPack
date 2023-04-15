@@ -8,7 +8,7 @@ import '../components/Footer.scss'
 const Footer = () => {
   return (
     <footer>
-      <p>&copy; Martin Gaidos, 2023</p> <DiGithubBadge style={{ fontSize: '2.5rem' }} /> <FaLinkedin style={{ fontSize: '2rem' }} />
+      <p>&copy; Martin Gaidos, 2023. Beta</p> <DiGithubBadge style={{ fontSize: '2.5rem' }} /> <FaLinkedin style={{ fontSize: '2rem' }} />
     </footer>
   )
 }

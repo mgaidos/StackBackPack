@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
-import { calcLength, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import axios from 'axios'
 
@@ -37,25 +37,22 @@ const Dashboard = (props) => {
 
     const [addingItems, setAddingItems] = useState(false)
 
-    //const [updatingItems, setUpdatingItems] = useState(false)
-
     const [dashboardDataHeading, setDashboardDataHeading] = useState('')
     const [shareUrl, setShareUrl] = useState('')
 
- 
+
 
     //params
     const { userId } = useParams()
 
-    console.log(userId)
+    //console.log(userId)
 
     /* fetching users lists */
     useEffect(() => {
 
-        console.log(typeof idOfSelectedList)
+        //console.log(typeof idOfSelectedList)
         const accessToken = localStorage.getItem('token')
-        console.log("tady tokeen")
-        console.log(accessToken)
+        //console.log(accessToken)
 
 
         if (!isSharedList) {
@@ -68,7 +65,6 @@ const Dashboard = (props) => {
                 }
             })
                 .then(response => {
-                    console.log("JSEM V RESPONSEEEEEEEEE")
                     const data = response.data.result
 
 
@@ -80,8 +76,8 @@ const Dashboard = (props) => {
 
                     const items = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object').flatMap(category => category.items.filter(obj => typeof obj === 'object')))
 
-                    
-                    
+
+
                     setCategories(cat)
                     setItems(items)
                     setListsInDb(data)
@@ -100,10 +96,9 @@ const Dashboard = (props) => {
                 }
             })
                 .then(response => {
-                    console.log("JSEM V RESPONSEEEEEEEEE")
                     const data = response.data.result
 
-                    console.log(data)
+                    //console.log(data)
                     setLists(
                         ...lists,
                         data
@@ -113,8 +108,8 @@ const Dashboard = (props) => {
                     const items = data.flatMap(list => list.listCategories.filter(obj => typeof obj === 'object').flatMap(category => category.items.filter(obj => typeof obj === 'object')))
 
                     const name = data.filter(list => list._id == listId)[0].listName
-                    
-                    
+
+
 
                     setActualListNameValue(name)
                     setDashboardDataHeading(name)
@@ -134,7 +129,7 @@ const Dashboard = (props) => {
 
 
     useEffect(() => {
-        console.log(idOfSelectedCategory)
+        //console.log(idOfSelectedCategory)
     }, [idOfSelectedCategory])
 
     useEffect(() => {
@@ -148,49 +143,30 @@ const Dashboard = (props) => {
     }, [items])
 
     useEffect(() => {
-        console.log(categories)
+        //console.log(categories)
     }, [categories])
 
     useEffect(() => {
-        if(!isSharedList) {
+        if (!isSharedList) {
             let url
 
-            if(idOfSelectedList) {
+            if (idOfSelectedList) {
                 url = lists.filter(oneList => oneList._id == idOfSelectedList)[0].shareUrl
-                console.log(url)
+                //console.log(url)
                 setShareUrl(url)
             }
 
-            console.log(idOfSelectedList)
+            //console.log(idOfSelectedList)
         }
-        
+
     }, [idOfSelectedList])
 
 
 
 
-
-    useEffect(() => {
-        console.log(lists)
-
-
-        console.log(name)
-
-
-
-    }, [lists])
-
-
-
-    useEffect(() => {
-        console.log(listsInDb)
-    }, [listsInDb])
-
-
-
     const createNewCategory = (e) => {
-        // console.log(e.target.id)
-        //console.log(categories)
+        // //console.log(e.target.id)
+        ////console.log(categories)
 
         const hasInitialCategory = categories.filter(category => category._idOfList === e.target.id)
         //console.log(hasInitialCategory)
@@ -208,8 +184,6 @@ const Dashboard = (props) => {
 
                 }
                 ])
-
-
 
         }
 
@@ -252,7 +226,6 @@ const Dashboard = (props) => {
 
     const handleClickOnAddCategory = (e) => {
         createNewCategory(e)
-        //createNewItem(e)
     }
 
     const handleClickOnAddItem = (e) => {
@@ -261,12 +234,12 @@ const Dashboard = (props) => {
     }
 
     const handleDeleteItemClick = (e) => {
-        //console.log("Deleting item...: " + e.target.id)
+        ////console.log("Deleting item...: " + e.target.id)
         const filteredItems = items.filter(item => item._id != e.target.id)
-        //console.log(typeof e.target.value)
+        ////console.log(typeof e.target.value)
 
         const removedItem = items.filter(item => item._id == e.target.id)
-        // console.log(typeof e.target.value)
+        // //console.log(typeof e.target.value)
 
         const idOfCategory = removedItem[0]._idOfCategory
 
@@ -305,7 +278,7 @@ const Dashboard = (props) => {
         const filteredItems = items.filter(item => item._idOfCategory != e.target.name)
 
         const removedCategoryId = e.target.name
-        //console.log(e.target.name)
+        ////console.log(e.target.name)
         const accessToken = localStorage.getItem('token')
         axios.delete(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
             headers: {
@@ -320,7 +293,7 @@ const Dashboard = (props) => {
         })
             .then(response => {
                 const data = response
-                //console.log(data)
+                ////console.log(data)
 
                 setItems(filteredItems)
                 setCategories(filteredCategories)
@@ -351,7 +324,7 @@ const Dashboard = (props) => {
 
             .then(response => {
                 const data = response.data
-                //console.log(data)
+                ////console.log(data)
             })
             .catch(err => {
                 console.log(err)
@@ -402,7 +375,7 @@ const Dashboard = (props) => {
                     lists={lists}
                     isSharedList={isSharedList}
                     shareUrl={shareUrl}
-                    
+
 
                 />
 

@@ -46,8 +46,6 @@ const OneList = (props) => {
     const justUpdate = listsInDb.some(item => item._id == updatedOrNewListId)
 
 
-    // if (updatedOrNewListId) {
-    // pokud při přejmenování nove == stare nic se nestane 
     if (oldName[0].listName == newName) {
       return
     } else if (isAlreadySaved.length > 0) {
@@ -63,7 +61,7 @@ const OneList = (props) => {
       )
       setLists(newArr)
 
-      console.log(newArr)
+      //console.log(newArr)
 
       const accessToken = localStorage.getItem('token')
 
@@ -78,10 +76,10 @@ const OneList = (props) => {
       })
         .then(response => {
           const data = response.data
-          console.log(response)
+          //console.log(response)
 
           if (data.message === 'List name update was successful') {
-            console.log(data.message)
+            //console.log(data.message)
           } else {
             return
           }
@@ -112,10 +110,10 @@ const OneList = (props) => {
       })
         .then(response => {
           const data = response.data
-          //console.log(data)
+          ////console.log(data)
 
           if (data.message === 'Data saved!!') {
-            console.log(data.message)
+            //console.log(data.message)
           } else {
             return
           }
@@ -128,7 +126,7 @@ const OneList = (props) => {
 
       return
     }
-    // }
+  
   }
 
 
@@ -193,7 +191,6 @@ const OneList = (props) => {
           type: "spring",
           damping: 50,
           stiffness: 500,
-          //restDelta: 0.005
         }
       }}
     >

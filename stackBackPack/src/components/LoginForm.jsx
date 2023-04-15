@@ -39,7 +39,7 @@ const LoginForm = () => {
         })
             .then(response => {
                 const data = response.data
-                console.log(data)
+                //console.log(data)
                 
 
                 if (data.message === 'Login successful') {
@@ -104,7 +104,7 @@ const LoginForm = () => {
                         ...values,
                         [input.name]: e.target.value
                     })
-                    console.log(values.email)
+                    //console.log(values.email)
                 }}
             />
         ))}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 
@@ -10,13 +10,13 @@ import Dashboard from './Dashboard'
 import Footer from '../components/Footer'
 
 
-const SharedList = (props) => {
+const SharedList = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [isSharedList, setIsSharedList] = useState(true)
 
 
     const { listId } = useParams()
-    console.log(listId)
+   // console.log(listId)
 
 
 

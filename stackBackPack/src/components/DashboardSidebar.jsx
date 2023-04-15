@@ -1,8 +1,4 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { Reorder } from "framer-motion"
-import { v4 as uuidv4 } from 'uuid';
-
 
 //components
 import OneList from './OneList'
@@ -11,10 +7,7 @@ import OneList from './OneList'
 import './DashboardSidebar.scss'
 
 
-
-
 const DashboardSidebar = (props) => {
-
 
     const {
         idOfselectedList,
@@ -30,10 +23,6 @@ const DashboardSidebar = (props) => {
     } = props
 
     const createNewList = () => {
-        /*
-                const randomUrl = uuidv4().slice(0, 8)
-                console.log(randomUrl)
-        */
 
         const listId = new Date().getTime()
             setLists(

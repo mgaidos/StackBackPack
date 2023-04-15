@@ -1,16 +1,17 @@
 import axios from 'axios'
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
-import Graph from './Graph'
-import TotalList from './TotalList'
+
 
 //styles
 import './DashboardData.scss'
 
 //components
 import Category from './Category'
-import { result, set } from 'lodash-es'
+import Graph from './Graph'
+import TotalList from './TotalList'
+
 
 
 
@@ -50,15 +51,15 @@ const DashboardData = (props) => {
 
 
   useEffect(() => {
-    console.log(dataForChart)
+    //console.log(dataForChart)
   }, [dataForChart])
 
   useEffect(() => {
-    console.log(totalUnit)
+    //console.log(totalUnit)
   }, [totalUnit])
 
   useEffect(() => {
-    console.log(shareUrl)
+    //console.log(shareUrl)
   }, [shareUrl])
 
 
@@ -92,7 +93,7 @@ const DashboardData = (props) => {
         const existingItem = accumulator.find((item) => item._idOfCategory == currentValue._idOfCategory)
 
         if (existingItem) {
-          console.log(existingItem)
+          //console.log(existingItem)
           existingItem.totalWeight += value * currentValue.quantity
 
         } else {
@@ -124,22 +125,22 @@ const DashboardData = (props) => {
 
   //counting the weight of each category
   const sumWeights = (categoryId, setTotalCategoryWeight) => {
-    console.log('Počítám items..' + categoryId)
+    //console.log('Counting items..' + categoryId)
 
     if (items.length > 0) {
-      console.log(items.filter(item => item._idOfCategory == categoryId))
+      //console.log(items.filter(item => item._idOfCategory == categoryId))
       let itemsWeight = items.filter(item => item._idOfCategory == categoryId)
         .map(item => {
           if (item.weight === 0 || item.weight) {
             if (item.unit === 'g') {
-              console.log('grams')
+              //console.log('grams')
               const result = item.weight * item.quantity
-              console.log(item.weight)
+              //console.log(item.weight)
               return result
             }
 
             if (item.unit === 'kg') {
-              //console.log('kilograms')
+              ////console.log('kilograms')
               const result = (item.weight * 1000) * item.quantity
               return result
             }
@@ -153,7 +154,7 @@ const DashboardData = (props) => {
         .reduce((actualVal, nextVal) => {
           return actualVal + nextVal
         }, 0)
-      console.log(itemsWeight)
+      //console.log(itemsWeight)
 
       if (totalUnit === 'g') {
         itemsWeight = itemsWeight * 1000
@@ -229,7 +230,7 @@ const DashboardData = (props) => {
       {actualListNameValue ?
 
 
-        /*filters only the categories of the selected list and then maps */
+        /*filters only the categories of the selected list and then map */
         categories.filter(category => category._idOfList === idOfSelectedList).map(category => {
           return <Category
             key={category._id}

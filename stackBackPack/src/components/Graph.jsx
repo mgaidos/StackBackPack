@@ -39,14 +39,14 @@ const Graph = (props) => {
                 options: {
                     onClick: (event, elements) => {
                         if (elements.length > 0) {
-                            var index = elements[0].index;
-                            var label = chart.data.labels[index];
-                            var value = chart.data.datasets[0].data[index];
+                            const index = elements[0].index
+                            const label = chart.data.labels[index]
+                            const value = chart.data.datasets[0].data[index]
                             //elements[0].element.options.offset = 50
-                            console.log(index)
-                            console.log(label)
-                            console.log(value)
-                            console.log(elements[0].element)
+                            //console.log(index)
+                            //console.log(label)
+                            //console.log(value)
+                            //console.log(elements[0].element)
                         }
                     },
                     animation: true,

@@ -18,11 +18,6 @@ import '../pages/Register.scss'
 const Register = () => {
 
 
-
-
-
-
-
   return <div className='main-register-container'>
     <motion.main
       initial={{ y: 10, opacity: 0 }}
