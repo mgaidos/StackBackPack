@@ -31,6 +31,7 @@
             transition: transform 0.2s ease-in-out;
             margin: 5px;
             font-family: $main-font;
+            color: $font-color;
 
             &:hover {
                 transform: rotate(2deg) scale(110%);
