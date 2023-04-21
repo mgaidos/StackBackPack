@@ -8,6 +8,9 @@ import { Reorder } from "framer-motion"
 //styles
 import './Item.scss'
 
+//config
+import { USER_DASHBOARD_URL } from '../config.js'
+
 const Item = (props) => {
 
     const {
@@ -106,7 +109,7 @@ const Item = (props) => {
 
         //console.log("updating item")
 
-        axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+        axios.put(`${USER_DASHBOARD_URL}/${userId}`, {
             idOfSelectedList, idOfSelectedCategory, updatedItem
         }, {
             headers: {

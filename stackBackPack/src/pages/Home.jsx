@@ -2,6 +2,9 @@ import React from 'react'
 
 import { motion } from 'framer-motion'
 
+//config
+import { HOME_IMAGE_SRC } from '../config'
+
 
 //Styles
 import './Home.scss'
@@ -25,7 +28,7 @@ const Home = () => {
                     </ul>
                 </div>
                 <div className='article-2'>
-                    <img src="./assets/stb-mini.png" alt="" />
+                    <img src={`${HOME_IMAGE_SRC}`} alt="" />
                 </div>
             </article>
 

@@ -11,6 +11,9 @@ import { debounce } from 'lodash-es'
 //components
 import Item from './Item'
 
+//config
+import { USER_DASHBOARD_URL } from '../config.js'
+
 //styles
 import './Category.scss'
 
@@ -88,7 +91,7 @@ const Category = (props) => {
     const updateCategoryNameInDb = (idOfSelectedList, clickedCategory, newCategoryName) => {
 
         const accessToken = localStorage.getItem('token')
-        axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+        axios.put(`${USER_DASHBOARD_URL}/${userId}`, {
             idOfSelectedList, clickedCategory, newCategoryName
         }, {
             headers: {
@@ -111,7 +114,7 @@ const Category = (props) => {
 
         const accessToken = localStorage.getItem('token')
         console.log(savingCategory)
-        axios.post(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+        axios.post(`${USER_DASHBOARD_URL}/${userId}`, {
             savingCategory
         }, {
             headers: {
@@ -198,7 +201,7 @@ const Category = (props) => {
         const clickedCategory = categoryId
 
         const accessToken = localStorage.getItem('token')
-        axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+        axios.put(`${USER_DASHBOARD_URL}/${userId}`, {
             idOfSelectedList, clickedCategory, newOrder
         }, {
             headers: {

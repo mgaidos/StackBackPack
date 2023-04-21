@@ -8,6 +8,11 @@ import { Link, useNavigate } from 'react-router-dom'
 //components
 import FormInput from './FormInput'
 
+//config
+import { LOGIN_URL } from '../config.js'
+
+
+
 
 //styles
 import '../components/LoginForm.scss'
@@ -28,8 +33,9 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(LOGIN_URL)
 
-        axios.post('https://stackbackpack.onrender.com/login', {
+        axios.post(`${LOGIN_URL}`, {
             email, password
         }, {
             headers: {
@@ -43,6 +49,7 @@ const LoginForm = () => {
                 
 
                 if (data.message === 'Login successful') {
+                    console.log(data.message)
                     localStorage.setItem('token', data.token)
                     navigate(`/dashboard/${data.userId.userId}`)
                 } else {

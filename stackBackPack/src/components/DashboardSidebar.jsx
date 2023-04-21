@@ -3,6 +3,9 @@ import React from 'react'
 //components
 import OneList from './OneList'
 
+//config
+import { MY_LIST_URL } from '../config.js'
+
 //styles
 import './DashboardSidebar.scss'
 
@@ -31,7 +34,7 @@ const DashboardSidebar = (props) => {
                     _id: listId,
                     value: '',
                     type: 'text',
-                    shareUrl: `https://stackbackpack.netlify.app/my-list/${userId}/${listId}`
+                    shareUrl: `${MY_LIST_URL}/${userId}/${listId}`
                 }]
             )
     }

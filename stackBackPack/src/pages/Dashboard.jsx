@@ -3,7 +3,12 @@ import { useState, useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
+
+
 import axios from 'axios'
+
+//config
+import { USER_DASHBOARD_URL } from '../config.js'
 
 //components
 import DashboardSidebar from '../components/DashboardSidebar'
@@ -15,6 +20,8 @@ import './Dashboard.scss'
 
 
 const Dashboard = (props) => {
+
+
     const { setLoggedIn, isSharedList, listId } = props
 
 
@@ -56,7 +63,7 @@ const Dashboard = (props) => {
 
 
         if (!isSharedList) {
-            axios.get(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+            axios.get(`${USER_DASHBOARD_URL}/${userId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Custom-Header': 'fetchingUserLists',
@@ -88,7 +95,7 @@ const Dashboard = (props) => {
                     setAuthenticated(false)
                 })
         } else {
-            axios.get(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+            axios.get(`${USER_DASHBOARD_URL}/${userId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Custom-Header': 'fetchingUserLists-shared',
@@ -249,7 +256,7 @@ const Dashboard = (props) => {
         setItems(filteredItems)
         const accessToken = localStorage.getItem('token')
 
-        axios.delete(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+        axios.delete(`${USER_DASHBOARD_URL}/${userId}`, {
 
             headers: {
                 'Content-Type': 'application/json',
@@ -280,7 +287,7 @@ const Dashboard = (props) => {
         const removedCategoryId = e.target.name
         ////console.log(e.target.name)
         const accessToken = localStorage.getItem('token')
-        axios.delete(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+        axios.delete(`${USER_DASHBOARD_URL}/${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Custom-Header': 'deleteCategory',
@@ -312,7 +319,7 @@ const Dashboard = (props) => {
 
     const saveItemToDb = (idOfList, idOfCategory, savingItem) => {
         const accessToken = localStorage.getItem('token')
-        axios.post(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+        axios.post(`${USER_DASHBOARD_URL}/${userId}`, {
             idOfList, idOfCategory, savingItem
         }, {
             headers: {

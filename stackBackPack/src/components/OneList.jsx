@@ -7,6 +7,9 @@ import axios from 'axios'
 //styles
 import './OneList.scss'
 
+//config
+import { USER_DASHBOARD_URL } from '../config.js'
+
 
 
 
@@ -65,7 +68,7 @@ const OneList = (props) => {
 
       const accessToken = localStorage.getItem('token')
 
-      axios.put(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+      axios.put(`${USER_DASHBOARD_URL}/${userId}`, {
         _id, newName, shareUrl
       }, {
         headers: {
@@ -99,7 +102,7 @@ const OneList = (props) => {
       const accessToken = localStorage.getItem('token')
       const listName = e.target.value
 
-      axios.post(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+      axios.post(`${USER_DASHBOARD_URL}/${userId}`, {
         _id, user, listName, shareUrl
       }, {
         headers: {
@@ -136,7 +139,7 @@ const OneList = (props) => {
     //console.log(removedListId)
     const accessToken = localStorage.getItem('token')
 
-    axios.delete(`https://stackbackpack.onrender.com/dashboard/${userId}`, {
+    axios.delete(`${USER_DASHBOARD_URL}/${userId}`, {
       headers: {
         'Content-Type': 'application/json',
         'Custom-Header': 'deleteList',

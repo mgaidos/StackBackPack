@@ -1,4 +1,4 @@
-import axios from 'axios'
+
 import React from 'react'
 import { useState, useEffect } from 'react'
 
@@ -11,8 +11,6 @@ import './DashboardData.scss'
 import Category from './Category'
 import Graph from './Graph'
 import TotalList from './TotalList'
-
-
 
 
 const DashboardData = (props) => {
