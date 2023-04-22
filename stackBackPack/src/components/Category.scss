@@ -82,13 +82,14 @@
                     flex: 3;
 
                     display: flex;
+                    
 
                     input[name='Item description'] {
                         flex: 2;
                     }
 
                     .read-only {
-                        @include readOnly
+                        @include readOnly;
                     }
                 }
 
@@ -237,4 +238,12 @@
 
     }
 
+}
+
+
+@media only screen and (max-width: 800px) {
+    .item-name-description {
+        flex-direction: column;
+
+    }
 }

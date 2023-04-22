@@ -136,8 +136,8 @@ const Item = (props) => {
         <ul className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
             <div className='category-li-items'>
                 <div className='item-name-description'>
-                    <input className={isSharedList ? 'read-only' : ''} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
-                    <input className={isSharedList ? 'read-only' : ''} type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
+                    <input className={isSharedList ? 'item-name read-only' : 'item-name'} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
+                    <input className={isSharedList ? 'item-description read-only' : 'item-description'} type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
                 </div>
                 <div className='item-quantity-weight'>
                     <input className={isSharedList ? 'read-only input-qty' : 'input-qty'} type="number" min={0} name='item-pcs' defaultValue={quantity ? quantity : 0} placeholder='pcs' />

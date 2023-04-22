@@ -4,13 +4,15 @@
 header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 
 
     h1 {
         flex: 1;
         margin: 0;
     }
+
+    
 
     .nav-container {
 
@@ -33,7 +35,7 @@ header {
             .logout-button {
                 position: absolute;
                 right: 5px;
-                
+
             }
 
             a {
@@ -64,6 +66,85 @@ header {
 
         }
 
+
+
+
+    }
+
+    .hamburger {
+        width: 50px;
+        height: 40px;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: inherit;
+        border-radius: 5px;
+        position: absolute;
+        right: 0;
+        margin: 5px 10px 0px 0px;
+
+
+
+        .line {
+            display: none;
+            width: 45px;
+            height: 3px;
+            margin: 4px 0;
+            background-color: $font-color;
+            transition: transform 0.2s ease-out;
+
+            &.open:nth-of-type(1) {
+                transform: translateY(11px) rotate(45deg);
+            }
+
+            &.open:nth-of-type(2) {
+                opacity: 0;
+            }
+
+            &.open:nth-of-type(3) {
+                transform: translateY(-11px) rotate(-45deg)
+            }
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+            .nav-container {
+
+                
+                nav {
+                    z-index: 1;
+                    justify-content: space-evenly;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 50px;
+                    right: 0;
+                    transform: translate(100%);
+                    background-color: $bg-hamburger-menu;
+                    height: 80%;
+                    width: 25%;
+                    border-bottom-left-radius: 15px;
+                    border-top-left-radius: 15px;
+                    transition: transform 0.2s ease;
+
+                    &.nav-open {
+                        transform: translate(1px);
+                        right: 1;
+                    }
+                }
+
+                
+            }
+
+            .hamburger {
+                display: flex;
+
+                .line {
+                    display: block;
+                }
+            }
+        
     }
 
 
