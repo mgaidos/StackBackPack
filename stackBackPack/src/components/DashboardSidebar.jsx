@@ -22,7 +22,8 @@ const DashboardSidebar = (props) => {
         listsInDb,
         setLists,
         createNewCategory,
-        userId
+        userId,
+        showLists
     } = props
 
     const createNewList = () => {
@@ -42,13 +43,13 @@ const DashboardSidebar = (props) => {
     const handleClickCreateNewList = () => {
         createNewList()
     }
-    return <aside>
+    return <aside className={showLists ? 'open' : ''}>
         <h3>Your lists</h3>
 
 
         <button onClick={handleClickCreateNewList} className='new-list-button'>Create new list</button>
 
-        <ul className='lists'>
+        <ul className='lists' >
             {lists.map((oneList) => {
                 return <OneList
                     key={oneList._id}

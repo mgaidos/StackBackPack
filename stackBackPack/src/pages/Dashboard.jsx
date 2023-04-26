@@ -22,7 +22,7 @@ import './Dashboard.scss'
 const Dashboard = (props) => {
 
 
-    const { setLoggedIn, isSharedList, listId } = props
+    const { setLoggedIn, isSharedList, listId, showLists, handleShowLists } = props
 
 
     //states
@@ -363,6 +363,7 @@ const Dashboard = (props) => {
                     actualListNameValue={actualListNameValue}
                     setActualListNameValue={setActualListNameValue}
                     userId={userId}
+                    showLists={showLists}
                 /> : null}
                 <DashboardData
                     dashboardDataHeading={dashboardDataHeading}

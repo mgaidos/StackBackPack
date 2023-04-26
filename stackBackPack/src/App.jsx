@@ -22,16 +22,22 @@ const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false)
   const [isSharedList, setIsSharedList] = useState(false)
+  const [showLists, setShowLists] = useState(false)
+
+  const handleShowLists = () => {
+    setShowLists(!showLists)
+  }
+
  
   return <BrowserRouter >
     <Routes>
-      <Route path='/' element={<ShardeLayout loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}>
+      <Route path='/' element={<ShardeLayout handleShowLists={handleShowLists} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}>
         <Route index element={<Home />} />
         <Route path='/register' element={<Register />} />  
         <Route path='/login' element={<Login />} />
-        <Route path='/dashboard/:userId' element={<Dashboard setLoggedIn={setLoggedIn} />} />
+        <Route path='/dashboard/:userId' element={<Dashboard showLists={showLists} setLoggedIn={setLoggedIn}  />} />
       </Route>
-      <Route path='/my-list/:userId/:listId' element={<SharedList setIsSharedList={setIsSharedList} />} />
+      <Route path='/my-list/:userId/:listId' element={<SharedList  setIsSharedList={setIsSharedList} />} />
     </Routes>
   </BrowserRouter>
 

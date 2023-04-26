@@ -8,6 +8,8 @@ import '../components/navbar.scss'
 
 const Navbar = (props) => {
 
+    const { handleShowLists } = props
+
     const [isOpen, setIsOpen] = useState(false)
 
     const navigate = useNavigate()
@@ -15,7 +17,9 @@ const Navbar = (props) => {
     const { loggedIn, setLoggedIn } = props
 
     const handleClick = (e) => {
-        console.log(e.target.id)
+        if (e.target.id === 'navigation') {
+            return
+        }
 
         if (e.target.id === 'logout') {
             setIsOpen(!isOpen)
@@ -26,13 +30,18 @@ const Navbar = (props) => {
 
         if (e.target.id === 'login' || 'home' || 'register') {
             setIsOpen(!isOpen)
+
         }
+
+
 
     }
 
     const handleHamburgerClick = (e) => {
         console.log(e.target)
         setIsOpen(!isOpen)
+        handleShowLists()
+
     }
 
     return <header>
@@ -45,7 +54,7 @@ const Navbar = (props) => {
         </button>
 
         <div className='nav-container'>
-            <nav onClick={handleClick} className={` ${isOpen ? 'nav-open' : ''}`}>
+            <nav id='navigation' onClick={handleClick} className={` ${isOpen ? 'nav-open' : ''}`}>
                 {loggedIn ? '' : <NavLink id='home' to='/'>Home</NavLink>}
                 {loggedIn ? <a className='logout-button' id='logout' >Log out</a> : ''}
                 {loggedIn ? '' : <NavLink id='login' to='/login'>Login</NavLink>}

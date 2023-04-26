@@ -8,10 +8,10 @@ import Footer from '../components/Footer'
 
 const ShardeLayout = (props) => {
 
-  const { loggedIn, setLoggedIn } = props
+  const { loggedIn, setLoggedIn, handleShowLists  } = props
 
     return <>
-        <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Navbar  loggedIn={loggedIn} setLoggedIn={setLoggedIn} handleShowLists={handleShowLists} />
         <Outlet/>
         <Footer/>
     </>
