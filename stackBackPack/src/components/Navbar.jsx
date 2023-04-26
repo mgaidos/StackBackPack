@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 
@@ -15,6 +15,15 @@ const Navbar = (props) => {
     const navigate = useNavigate()
 
     const { loggedIn, setLoggedIn } = props
+
+    useEffect(()=> {
+
+
+        return () => {
+            setIsOpen(false)
+        }
+    }, [])
+    
 
     const handleClick = (e) => {
         if (e.target.id === 'navigation') {

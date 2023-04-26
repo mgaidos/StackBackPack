@@ -33,7 +33,7 @@ body {
     height: 100%;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 820px) {
     body {
         padding-top: 0px;
 
@@ -41,5 +41,6 @@ body {
 
     .content {
         position: fixed;
-    }
+        overflow-y: scroll;
+        }
 }

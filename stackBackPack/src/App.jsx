@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 //styles
 
@@ -27,6 +27,14 @@ const App = () => {
   const handleShowLists = () => {
     setShowLists(!showLists)
   }
+
+  useEffect(()=> {
+
+
+    return () => {
+        setShowLists(false)
+    }
+}, [])
 
  
   return <BrowserRouter >
