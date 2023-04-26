@@ -41,6 +41,7 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+
     try {
       axios.post(`${REGISTER_URL}`, {
         username, email, password

@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import { debounce } from 'lodash-es'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { Reorder } from "framer-motion"
-
+import { Reorder, useDragControls  } from "framer-motion"
+import { MdDragIndicator } from 'react-icons/md'
 //styles
 import './Item.scss'
 
@@ -35,6 +35,8 @@ const Item = (props) => {
     const [idOfSelectedItem, setIdOfSelectedItem] = useState('')
 
     const { userId } = useParams()
+
+    const controls = useDragControls()
 
 
     useEffect(() => {
@@ -130,10 +132,15 @@ const Item = (props) => {
 
 
     return <Reorder.Item
+  
+    
 
         value={value}
+        dragListener={false}
+        dragControls={controls}
     >
         <ul className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
+            <div className="reorder-handle" style={{ touchAction: "none" }} onPointerDown={(e) => controls.start(e)}><MdDragIndicator style={{ fontSize: '1.6rem' }} /></div>
             <div className='category-li-items'>
                 <div className='item-name-description'>
                     <input className={isSharedList ? 'item-name read-only' : 'item-name'} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />

@@ -61,9 +61,12 @@
 
         .category-ul-items {
             display: flex;
+            align-items: center;
             list-style: none;
             padding: 0;
             border-bottom: 1px groove rgba(153, 146, 144, 0.73);
+
+          
 
             input {
                 @include dashboardDataInputs(30%)

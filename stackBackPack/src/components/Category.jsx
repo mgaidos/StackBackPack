@@ -65,7 +65,7 @@ const Category = (props) => {
 
 
     useEffect(() => {
-       // console.log(itemsOfOneCategory)
+        // console.log(itemsOfOneCategory)
     }, [itemsOfOneCategory])
 
 
@@ -75,7 +75,7 @@ const Category = (props) => {
 
 
     useEffect(() => {
-       // console.log(items)
+        // console.log(items)
         sumWeights(categoryId, setTotalCategoryWeight)
         sumPcs(categoryId, setTotalPcsInCatgeory)
         setItemsOfOneCategory(items.filter(item => item._idOfCategory == categoryId))
@@ -85,7 +85,7 @@ const Category = (props) => {
 
     const handleChange = (e) => {
         setActualCategoryNameValue(e.target.value)
-     //   console.log(e.target.value)
+        //   console.log(e.target.value)
     }
 
     const updateCategoryNameInDb = (idOfSelectedList, clickedCategory, newCategoryName) => {
@@ -125,7 +125,7 @@ const Category = (props) => {
         })
             .then(response => {
                 const data = response.data
-               // //console.log(data)
+                // //console.log(data)
 
             })
             .catch(err => {
@@ -221,7 +221,7 @@ const Category = (props) => {
     }
 
     const handleReorder = (newOrder) => {
-   
+
         setItemsOfOneCategory(newOrder)
 
 
@@ -245,22 +245,32 @@ const Category = (props) => {
             <li className='category-li-descriptions'>
                 {
                     isSharedList
-                    ?
-                    <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' readOnly />
-                    :
-                    <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' />
+                        ?
+                        <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' readOnly />
+                        :
+                        <input onBlur={handleBlurCategory} onChange={handleChange} type="text" name='Category name' defaultValue={value} placeholder='Category name' />
 
                 }
-                
+
                 <div className='qt-weight'>
                     <span className='qty-span-cell'>Qantity</span>
                     <span className='weight-span-cell'>Weight</span>
-                    {isSharedList ? '' :<button className='delete-category-button' name={categoryId} onClick={handleDeleteCategoryClick}>X</button>}
+                    {isSharedList ? '' : <button className='delete-category-button' name={categoryId} onClick={handleDeleteCategoryClick}>X</button>}
                 </div>
             </li>
 
 
-            <Reorder.Group axis='y' values={itemsOfOneCategory} onReorder={debounce((newOrder) => { handleReorder(newOrder) }, 0.200)}>
+            <Reorder.Group
+                style={{
+                    listStyleType: "none",
+                    margin: 0,
+                    padding: 0,
+                }}
+                axis='y'
+                values={itemsOfOneCategory}
+                onReorder={debounce((newOrder) => { handleReorder(newOrder) }, 0.200)
+
+                }>
                 {itemsOfOneCategory.map(item => {
                     return <Item
                         value={item}
