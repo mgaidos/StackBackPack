@@ -36,7 +36,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path='/register' element={<Register />} />  
         <Route path='/login' element={<Login />} />
-        <Route path='/dashboard/:userId' element={<Dashboard showLists={showLists} setLoggedIn={setLoggedIn}  />} />
+        <Route path='/dashboard/:userId' element={<Dashboard showLists={showLists} setShowLists={setShowLists} setLoggedIn={setLoggedIn}  />} />
       </Route>
       <Route path='/my-list/:userId/:listId' element={<SharedList  setIsSharedList={setIsSharedList} />} />
     </Routes>

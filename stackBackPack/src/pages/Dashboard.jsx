@@ -22,7 +22,7 @@ import './Dashboard.scss'
 const Dashboard = (props) => {
 
 
-    const { setLoggedIn, isSharedList, listId, showLists, handleShowLists } = props
+    const { setLoggedIn, isSharedList, listId, showLists, setShowLists } = props
 
 
     //states
@@ -52,7 +52,13 @@ const Dashboard = (props) => {
     //params
     const { userId } = useParams()
 
-    //console.log(userId)
+    //when logging out, set showLists to false so that your lists are not displayed when you log in again
+    useEffect(()=> {
+
+        return ()=> {
+            setShowLists(false)
+        }
+    }, [])
 
     /* fetching users lists */
     useEffect(() => {
