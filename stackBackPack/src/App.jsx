@@ -28,13 +28,6 @@ const App = () => {
     setShowLists(!showLists)
   }
 
-  useEffect(()=> {
-
-
-    return () => {
-        setShowLists(false)
-    }
-}, [])
 
  
   return <BrowserRouter >

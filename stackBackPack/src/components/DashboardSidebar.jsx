@@ -43,7 +43,7 @@ const DashboardSidebar = (props) => {
     const handleClickCreateNewList = () => {
         createNewList()
     }
-    return <aside className={showLists ? 'open' : ''}>
+    return <aside className={` ${showLists ? 'open' : 'not-open'}`}>
         <h3>Your lists</h3>
 
 

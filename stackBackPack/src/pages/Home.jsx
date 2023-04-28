@@ -31,7 +31,11 @@ const Home = () => {
                     <div className='article-2'>
                         <img src={`${HOME_IMAGE_SRC}`} alt="" />
                     </div>
+
+
                 </article>
+
+
 
             </section>
         </motion.main>
