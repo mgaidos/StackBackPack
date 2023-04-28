@@ -16,14 +16,14 @@ const Navbar = (props) => {
 
     const { loggedIn, setLoggedIn } = props
 
-    useEffect(()=> {
+    useEffect(() => {
 
 
         return () => {
             setIsOpen(false)
         }
     }, [])
-    
+
 
     const handleClick = (e) => {
         if (e.target.id === 'navigation') {
@@ -49,7 +49,13 @@ const Navbar = (props) => {
     const handleHamburgerClick = (e) => {
         console.log(e.target)
         setIsOpen(!isOpen)
-        handleShowLists()
+        
+        //console.log(location.pathname.includes('dashboard'))
+
+        if (location.pathname.includes('dashboard')) {
+            handleShowLists()
+        }
+
 
     }
 
