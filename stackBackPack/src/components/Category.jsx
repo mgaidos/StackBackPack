@@ -253,6 +253,7 @@ const Category = (props) => {
                 }
 
                 <div className='qt-weight'>
+                    <span className='wearable-help-span'></span>
                     <span className='qty-span-cell'>Qantity</span>
                     <span className='weight-span-cell'>Weight</span>
                     {isSharedList ? '' : <button className='delete-category-button' name={categoryId} onClick={handleDeleteCategoryClick}>X</button>}
@@ -281,6 +282,8 @@ const Category = (props) => {
                         quantity={item.quantity}
                         weight={item.weight}
                         unit={item.unit}
+                        wearable={item.wearable}
+                        eatable={item.eatable}
                         handleDeleteItemClick={handleDeleteItemClick}
                         items={items}
                         setItems={setItems}
@@ -297,6 +300,7 @@ const Category = (props) => {
             <li className='category-total'>
                 <div className='category-total-help-div'></div>
                 <div className='category-total-wrapper-div'>
+                    <span className='help-span'></span>
                     <div><span className='category-total-qty'>{totalPcsInCatgeory}</span></div>
                     <div className='category-total-weight'>
                         <span className='category-total-value'>{totalCategoryWeight % 1 === 0 ? totalCategoryWeight : totalCategoryWeight.toFixed(3)}</span>

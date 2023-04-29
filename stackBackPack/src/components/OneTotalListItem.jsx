@@ -32,10 +32,11 @@ const OneTotalListItem = (props) => {
                 {label}
             </span>
         </div>
+
+        
         <div className='weight-unit-container'>
             <div className='weight-unit-wrapper'>
-                <span>{totalValue}</span>
-                <span>{totalUnit}</span>
+                <span>{totalValue + ' ' + totalUnit}</span>
             </div>
         </div>
     </li>

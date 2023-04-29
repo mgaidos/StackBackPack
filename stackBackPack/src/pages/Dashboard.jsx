@@ -228,7 +228,10 @@ const Dashboard = (props) => {
                 itemDescription: '',
                 quantity: 0,
                 weight: 0,
-                unit: 'g'
+                unit: 'g',
+                wearable: false,
+                eatable: false
+
 
             }
             ]

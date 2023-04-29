@@ -34,6 +34,14 @@ const itemsSchema = Schema({
   unit: {
     type: String,
     required: false
+  },
+  wearable: {
+    type: Boolean,
+    required: false
+  },
+  eatable: {
+    type: Boolean,
+    required: false
   }
   
 })

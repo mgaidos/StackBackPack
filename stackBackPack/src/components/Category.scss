@@ -35,6 +35,10 @@
                 align-items: center;
                 flex: 1;
 
+                .wearable-help-span {
+                    width: 20px;
+                }
+
                 .qty-span-cell {
                     min-width: 4rem;
                     display: flex;
@@ -101,6 +105,25 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+
+                    .labels {
+                        width: 20px;
+                        visibility: hidden;
+
+                        
+
+                        .wearable-visible {
+                            visibility: visible;
+                        }
+
+                        .eatable-visible {
+                            visibility: visible;
+                        }
+                    }
+
+                    .labels-visible {
+                        visibility: visible;
+                    }
 
                     .read-only {
                         @include readOnly
@@ -193,6 +216,10 @@
             flex: 1;
             justify-content: space-between;
             align-items: center;
+
+            .help-span {
+                width: 20px;
+            }
 
 
 

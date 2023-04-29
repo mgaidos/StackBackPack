@@ -4,9 +4,10 @@ const updateItem = async (req, res) => {
     const { idOfSelectedList, idOfSelectedCategory, updatedItem } = req.body
     const updatedItemId = updatedItem[0]._id
 
-    console.log(idOfSelectedList)
-    console.log(idOfSelectedCategory)
-    console.log(updatedItemId)
+    console.log('id listu: ' + idOfSelectedList)
+    console.log('id kategorie: ' +idOfSelectedCategory)
+    console.log('id itemu: ' + updatedItemId)
+    
 
     
     try {

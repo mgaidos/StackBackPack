@@ -204,6 +204,8 @@ const DashboardData = (props) => {
               dataForChart={dataForChart}
               setTotalUnit={setTotalUnit}
               totalUnit={totalUnit}
+              idOfSelectedList={idOfSelectedList}
+              items={items}
             />
             {
               isSharedList
