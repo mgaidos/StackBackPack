@@ -46,10 +46,8 @@ const Item = (props) => {
     const controls = useDragControls()
 
 
-    useEffect(() => {
-        console.log(wearable)
-        console.log(eatable)
-    }, [])
+  
+    
 
 
     useEffect(() => {
@@ -119,8 +117,7 @@ const Item = (props) => {
 
         const accessToken = localStorage.getItem('token')
 
-        console.log("updating item")
-        console.log(updatedItem)
+        
 
         axios.put(`${USER_DASHBOARD_URL}/${userId}`, {
             idOfSelectedList, idOfSelectedCategory, updatedItem
@@ -133,7 +130,7 @@ const Item = (props) => {
         })
             .then(response => {
                 const data = response.data
-                console.log(data)
+                //console.log(data)
             })
             .catch(err => {
                 console.log(err)
@@ -142,12 +139,12 @@ const Item = (props) => {
 
     const handleMouseOver = () => {
         setLabelsVisible(true)
-        console.log("ahoj")
+       
 
     }
     const handleMouseLeave = () => {
         setLabelsVisible(false)
-        console.log("nazdar")
+        
 
     }
 
@@ -160,9 +157,8 @@ const Item = (props) => {
 
             if(isEatable) return
 
-            console.log("ipravuju v items a ukladam nositelne")
             setIsWearable(!isWearable)
-            console.log( Boolean(e.target.getAttribute('value')))
+            //console.log( Boolean(e.target.getAttribute('value')))
 
             setItems(items.map(oneItem =>
                 oneItem._id == id ?
@@ -175,7 +171,8 @@ const Item = (props) => {
         if (e.target.id === 'eatable') {
 
             if(isWearable) return
-            console.log("ipravuju v items a ukladam jidlo")
+           
+            
             setIsEatable(!isEatable)
 
             setItems(items.map(oneItem =>

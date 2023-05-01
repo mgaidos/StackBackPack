@@ -33,7 +33,7 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(LOGIN_URL)
+        //console.log(LOGIN_URL)
 
         axios.post(`${LOGIN_URL}`, {
             email, password
@@ -49,7 +49,7 @@ const LoginForm = () => {
                 
 
                 if (data.message === 'Login successful') {
-                    console.log(data.message)
+                   // console.log(data.message)
                     localStorage.setItem('token', data.token)
                     navigate(`/dashboard/${data.userId.userId}`)
                 } else {

@@ -17,33 +17,61 @@ const TotalList = (props) => {
     }, [])
 
     const itemsOfSelectedList = items.filter(item => item._idOfList == idOfSelectedList)
-    console.log(itemsOfSelectedList)
+   // console.log(itemsOfSelectedList)
 
     const totalValue = dataForChart.dataSet.reduce((acc, cur) => {
         return acc + cur
     }, 0)
 
+    
+
+    /*
+        const baseWeight = itemsOfSelectedList
+            .filter(item => item.quantity > 0 && item.wearable === false && item.eatable === false)
+            .reduce((acc, cur) => {
+                return acc + (cur.weight * cur.quantity)
+            }, 0)
+    
+    */
+
+
+
     const baseWeight = itemsOfSelectedList
-        .filter(item => item.quantity > 0 && item.wearable === false && item.eatable === false)
+        .filter(item => item.quantity > 0 && item.eatable === false)
         .reduce((acc, cur) => {
-            return acc + (cur.weight * cur.quantity)
+
+            //If a wearable item is inserted more than 1 time, each additional item counts towards the base weight
+            if (cur.wearable && cur.quantity > 1) {
+                return acc + (cur.weight * (cur.quantity - 1))
+            }
+            //If the item is wearable and there is 1 or less of it, it does not count towards the base weight
+            if (cur.wearable && cur.quantity <= 1) {
+                return acc
+            }
+            //If the item is not wearable, it counts towards the basic weight
+            if (cur.wearable === false) {
+                return acc + (cur.weight * cur.quantity)
+            }
+
         }, 0)
 
+
+    //add up the weight of all consumable items
     const consumable = itemsOfSelectedList
         .filter(item => item.quantity > 0 && item.eatable === true)
         .reduce((acc, cur) => {
             return acc + (cur.weight * cur.quantity)
         }, 0)
 
+
+
+
     const worn = itemsOfSelectedList
         .filter(item => item.quantity > 0 && item.wearable === true)
         .reduce((acc, cur) => {
-            return acc + (cur.weight * cur.quantity)
+            // if an wearable item is inserted more than 1 time, it is counted only once
+            return acc + (cur.weight * 1)
         }, 0)
-
-    console.log(worn)
-
-
 
 
 
@@ -96,10 +124,10 @@ const TotalList = (props) => {
                 <span className='total-list-footer-total-span'>Total</span>
             </div>
 
-            
+
 
             <div className='total-list-footer-span-wrapper'>
-                <span className='total-list-footer-total-value' >{finalValue(totalValue,totalUnit)}</span>
+                <span className='total-list-footer-total-value' >{finalValue(totalValue, totalUnit)}</span>
                 <div>
                     <select defaultValue={totalUnit} name='unit-select' >
                         <option value="g">g</option>
@@ -115,7 +143,7 @@ const TotalList = (props) => {
             </div>
 
             <div className='total-list-footer-span-wrapper'>
-                <span className='total-list-footer-total-value' >{finalValue(worn,totalUnit) + ' ' + totalUnit}</span>
+                <span className='total-list-footer-total-value' >{finalValue(worn, totalUnit) + ' ' + totalUnit}</span>
             </div>
         </li>
 

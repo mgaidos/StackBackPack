@@ -103,7 +103,7 @@ const DashboardData = (props) => {
             })
         }
         return accumulator
-      }, []).map(item => item.totalWeight ? item.totalWeight : '')
+      }, []).map(item => item.totalWeight ? item.totalWeight : 0)
 
       setDataForChart({ dataSet: result, labels: categoriesNames })
 
@@ -173,7 +173,7 @@ const DashboardData = (props) => {
   //counting the number of items in each category
   const sumPcs = (categoryId, setTotalPcsInCatgeory) => {
     const itemsPcs = items.filter(item => item._idOfCategory == categoryId)
-      .map(item => item.quantity ? item.quantity : '')
+      .map(item => item.quantity ? item.quantity : 0)
       .reduce((actualVal, nextVal) => {
         return actualVal + nextVal
       }, 0)
