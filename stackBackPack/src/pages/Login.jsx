@@ -19,13 +19,6 @@ const Login = () => {
       </article>
 
       <LoginForm />
-
-
-      <div>
-        <p>
-        Note: If no user is currently active, it may take up to one minute to log in/register to the app due to free tier hosting on render.com. The server automatically shuts down after 15 minutes of inactivity.
-        </p>
-      </div>
     </motion.main>
   </div>
 
