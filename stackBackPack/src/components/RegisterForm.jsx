@@ -52,6 +52,7 @@ const RegisterForm = () => {
       })
         .then(response => {
           const data = response.data
+          console.log(data)
           setDbEmailErr(data.message ===
             'This email is already registered'
             ?
@@ -67,7 +68,17 @@ const RegisterForm = () => {
           }
         })
         .catch(err => {
-          console.log(err)
+          console.log(err.response.data.message)
+
+          setDbEmailErr(err.response.data.message ===
+            'This email is already registered'
+            ?
+            'This email is already registered'
+            :
+            ''
+          )
+          
+          
         })
 
 
