@@ -104,6 +104,11 @@
                             text-decoration: none;
                             font-family: Dosis-SemiBold;
                             font-size: 0.8rem;
+                            color: blue;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
                         }
                     }
 
