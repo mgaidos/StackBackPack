@@ -193,7 +193,7 @@ const Item = (props) => {
         }
 
         if (e.target.id === 'item-link') {
-           // console.log('link')
+            // console.log('link')
 
             setIsModalOpen(!isModalOpen)
         }
@@ -218,13 +218,17 @@ const Item = (props) => {
                     {
                         isSharedList
                             ?
-                            <div>
-                                <a target='_blank' className='item-anchor' href={itemUrl}>{itemName}</a>
-                            </div>
-
+                            itemUrl
+                                ?
+                                <div>
+                                    <a target='_blank' className='item-anchor' href={itemUrl}>{itemName}</a>
+                                </div>
+                                :
+                                <input className={isSharedList ? 'item-name read-only' : 'item-name'} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
                             :
                             <input className={isSharedList ? 'item-name read-only' : 'item-name'} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
                     }
+
 
 
 
