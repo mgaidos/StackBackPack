@@ -51,15 +51,15 @@ const Dashboard = (props) => {
 
     //params
     const { userId } = useParams()
-
+/*
     //when logging out, set showLists to false so that your lists are not displayed when you log in again
     useEffect(()=> {
 
         return ()=> {
-            setShowLists(false)
+           // setShowLists(false)
         }
     }, [])
-
+*/
     /* fetching users lists */
     useEffect(() => {
 
@@ -226,6 +226,7 @@ const Dashboard = (props) => {
                 _idOfList: idOfSelectedList,
                 itemName: '',
                 itemDescription: '',
+                itemUrl: '',
                 quantity: 0,
                 weight: 0,
                 unit: 'g',
@@ -238,6 +239,8 @@ const Dashboard = (props) => {
         )
 
         setAddingItems(true)
+
+    
     }
 
     const handleClickOnAddCategory = (e) => {

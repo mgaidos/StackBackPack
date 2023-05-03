@@ -4,9 +4,16 @@ import { debounce } from 'lodash-es'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Reorder, useDragControls } from "framer-motion"
+
+//components
+import ItemUrlModal from './ItemUrlModal'
+
+//icons
 import { MdDragIndicator } from 'react-icons/md'
 import { TbShirt } from 'react-icons/tb'
 import { GiKnifeFork } from 'react-icons/gi'
+import { FiLink } from 'react-icons/fi'
+
 //styles
 import './Item.scss'
 
@@ -29,6 +36,7 @@ const Item = (props) => {
         wearable,
         eatable,
         setItems,
+        itemUrl,
         value,
         handleOnMouseUp,
         isSharedList
@@ -40,14 +48,15 @@ const Item = (props) => {
     const [labelsVisible, setLabelsVisible] = useState(false)
     const [isWearable, setIsWearable] = useState(wearable)
     const [isEatable, setIsEatable] = useState(eatable)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const { userId } = useParams()
 
     const controls = useDragControls()
 
 
-  
-    
+
+
 
 
     useEffect(() => {
@@ -117,7 +126,7 @@ const Item = (props) => {
 
         const accessToken = localStorage.getItem('token')
 
-        
+
 
         axios.put(`${USER_DASHBOARD_URL}/${userId}`, {
             idOfSelectedList, idOfSelectedCategory, updatedItem
@@ -139,30 +148,30 @@ const Item = (props) => {
 
     const handleMouseOver = () => {
         setLabelsVisible(true)
-       
+
 
     }
     const handleMouseLeave = () => {
         setLabelsVisible(false)
-        
+
 
     }
 
     const handleClickOnLabels = (e, id) => {
         //e.stopPropagation()
         setIdOfSelectedItem(id)
-        const pokus = false
+
 
         if (e.target.id === 'wearable') {
 
-            if(isEatable) return
+            if (isEatable) return
 
             setIsWearable(!isWearable)
             //console.log( Boolean(e.target.getAttribute('value')))
 
             setItems(items.map(oneItem =>
                 oneItem._id == id ?
-                    { ...oneItem, wearable:  !isWearable }
+                    { ...oneItem, wearable: !isWearable }
                     :
                     oneItem))
 
@@ -170,9 +179,9 @@ const Item = (props) => {
 
         if (e.target.id === 'eatable') {
 
-            if(isWearable) return
-           
-            
+            if (isWearable) return
+
+
             setIsEatable(!isEatable)
 
             setItems(items.map(oneItem =>
@@ -183,24 +192,42 @@ const Item = (props) => {
 
         }
 
+        if (e.target.id === 'item-link') {
+           // console.log('link')
+
+            setIsModalOpen(!isModalOpen)
+        }
+
+        //console.log(isModalOpen)
+
         isSharedList ? '' : setUpdatingItems(true)
     }
 
 
 
     return <Reorder.Item
-
-
-
         value={value}
         dragListener={false}
         dragControls={controls}
     >
-        <ul onMouseLeave={handleMouseLeave} onMouseOver={handleMouseOver} className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
+        <ul onMouseLeave={isSharedList ? '' : handleMouseLeave} onMouseOver={isSharedList ? '' : handleMouseOver} className='category-ul-items' onChange={(e) => handleChangeOnInputs(e, id)} >
             <div className="reorder-handle" style={{ touchAction: "none" }} onPointerDown={(e) => controls.start(e)}><MdDragIndicator style={{ fontSize: '1.6rem' }} /></div>
             <div className='category-li-items'>
                 <div className='item-name-description'>
-                    <input className={isSharedList ? 'item-name read-only' : 'item-name'} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
+
+                    {
+                        isSharedList
+                            ?
+                            <div>
+                                <a target='_blank' className='item-anchor' href={itemUrl}>{itemName}</a>
+                            </div>
+
+                            :
+                            <input className={isSharedList ? 'item-name read-only' : 'item-name'} type="text" name='item-name' defaultValue={itemName} placeholder='Item name' />
+                    }
+
+
+
                     <input className={isSharedList ? 'item-description read-only' : 'item-description'} type="text" name='item-description' defaultValue={itemDescription} placeholder='Item description' />
                 </div>
                 <div className='item-quantity-weight'>
@@ -211,22 +238,54 @@ const Item = (props) => {
                         {
                             <TbShirt
                                 id='wearable'
-                                onClick={(e) => handleClickOnLabels(e, id)}
+                                onClick={isSharedList ? '' : (e) => handleClickOnLabels(e, id)}
                                 className={isWearable || labelsVisible ? 'wearable-visible' : ''}
-                            
+
                             />
                         }
 
                         {
                             <GiKnifeFork
                                 id='eatable'
-                                onClick={(e) => handleClickOnLabels(e, id)}
+                                onClick={isSharedList ? '' : (e) => handleClickOnLabels(e, id)}
                                 className={isEatable || labelsVisible ? 'eatable-visible' : ''}
-                                
+
+                            />
+
+                        }
+
+                        {
+
+
+                            <FiLink
+                                id='item-link'
+                                onClick={isSharedList ? '' : (e) => handleClickOnLabels(e, id)}
+                                className={itemUrl || labelsVisible ? 'link-visible' : ''}
                             />
                         }
 
+                        {
+                            isSharedList ?
+                                ''
+                                :
+                                <ItemUrlModal
+                                    isModalOpen={isModalOpen}
+                                    setIsModalOpen={setIsModalOpen}
+                                    items={items}
+                                    setItems={setItems}
+                                    isSharedList={isSharedList}
+                                    setUpdatingItems={setUpdatingItems}
+                                    id={id}
+                                    itemUrl={itemUrl}
+                                />
+                        }
+
+
+
+
+
                     </div>
+
 
 
 
@@ -243,6 +302,9 @@ const Item = (props) => {
                 </div>
             </div>
         </ul>
+
+
+
     </Reorder.Item>
 
     {

@@ -70,7 +70,7 @@
             padding: 0;
             border-bottom: 1px groove rgba(153, 146, 144, 0.73);
 
-          
+
 
             input {
                 @include dashboardDataInputs(30%)
@@ -89,7 +89,23 @@
                     flex: 3;
 
                     display: flex;
-                    
+
+                    div {
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        border: none;
+                        border: none;
+                        margin-top: 10px;
+                        border-radius: 5px;
+                        background-color: inherit;
+
+                        a {
+                            text-decoration: none;
+                            font-family: Dosis-SemiBold;
+                            font-size: 0.8rem;
+                        }
+                    }
 
                     input[name='Item description'] {
                         flex: 2;
@@ -110,13 +126,17 @@
                         width: 20px;
                         visibility: hidden;
 
-                        
+
 
                         .wearable-visible {
                             visibility: visible;
                         }
 
                         .eatable-visible {
+                            visibility: visible;
+                        }
+
+                        .link-visible {
                             visibility: visible;
                         }
                     }

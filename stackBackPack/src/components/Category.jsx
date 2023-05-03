@@ -284,6 +284,7 @@ const Category = (props) => {
                         unit={item.unit}
                         wearable={item.wearable}
                         eatable={item.eatable}
+                        itemUrl={item.itemUrl}
                         handleDeleteItemClick={handleDeleteItemClick}
                         items={items}
                         setItems={setItems}

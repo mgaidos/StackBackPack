@@ -23,6 +23,10 @@ const itemsSchema = Schema({
     type: String,
     required: false
   },
+  itemUrl: {
+    type: String,
+    required: false
+  },
   quantity: {
     type: Number,
     required: false
