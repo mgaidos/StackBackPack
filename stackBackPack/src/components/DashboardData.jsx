@@ -11,6 +11,7 @@ import './DashboardData.scss'
 import Category from './Category'
 import Graph from './Graph'
 import TotalList from './TotalList'
+import Loader from './Loader'
 
 
 const DashboardData = (props) => {

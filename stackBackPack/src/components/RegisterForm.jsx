@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 //components
 import FormInput from './FormInput'
+import Loader from './Loader'
 
 //config
 import { REGISTER_URL } from '../config.js'
@@ -23,6 +24,7 @@ import axios from 'axios'
 const RegisterForm = () => {
 
   const [dbEmailErr, setDbEmailErr] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const [values, setValues] = useState({
     username: '',
@@ -40,6 +42,7 @@ const RegisterForm = () => {
   //Toto bude poslední krok po validaci formu
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
 
     try {
@@ -77,8 +80,8 @@ const RegisterForm = () => {
             :
             ''
           )
-          
-          
+
+
         })
 
 
@@ -161,6 +164,10 @@ const RegisterForm = () => {
     <button type='submit'>Register</button>
 
     <Link to="/login">Already have an account?</Link>
+
+    {
+      loading && <Loader />
+    }
 
   </form>
 

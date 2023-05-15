@@ -2,6 +2,7 @@
 @import '../partials/mixins';
 
 .dashboard-data {
+    position: relative;
     width: 100%;
     //height: min-content;
     min-height: 100%;

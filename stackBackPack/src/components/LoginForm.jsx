@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 //components
 import FormInput from './FormInput'
+import Loader from './Loader'
 
 //config
 import { LOGIN_URL } from '../config.js'
@@ -19,6 +20,8 @@ import '../components/LoginForm.scss'
 
 const LoginForm = () => {
 
+    
+
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -29,11 +32,14 @@ const LoginForm = () => {
 
     const [dbEmailErr, setDbEmailErr] = useState('')
     const [dbPasswordErr, setDbPasswordErr] = useState('')
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         //console.log(LOGIN_URL)
+
+        setLoading(true)
 
         axios.post(`${LOGIN_URL}`, {
             email, password
@@ -44,6 +50,7 @@ const LoginForm = () => {
             }
         })
             .then(response => {
+                
                 const data = response.data
                 //console.log(data)
                 
@@ -57,6 +64,7 @@ const LoginForm = () => {
                 }
             })
             .catch(err => {
+                
                 console.log(err)
                 setDbEmailErr(err.response.data.message === 'User not found' ? 'User not found' : '')
                 setDbPasswordErr(err.response.data.message === 'Invalid password' ? 'Invalid password' : '')
@@ -119,6 +127,10 @@ const LoginForm = () => {
         <button type='submit'>Login</button>
 
         <Link to="/register">Don't have an account yet?</Link>
+
+        {
+        loading && <Loader/>
+        }
 
     </form>
 

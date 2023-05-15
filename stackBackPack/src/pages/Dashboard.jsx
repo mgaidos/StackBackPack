@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 
 
 
+
 import axios from 'axios'
 
 //config
@@ -13,6 +14,7 @@ import { USER_DASHBOARD_URL } from '../config.js'
 //components
 import DashboardSidebar from '../components/DashboardSidebar'
 import DashboardData from '../components/DashboardData'
+import Loader from '../components/Loader'
 
 
 //styles
@@ -33,6 +35,7 @@ const Dashboard = (props) => {
     const [categories, setCategories] = useState([])
     const [items, setItems] = useState([])
     const [listsInDb, setListsInDb] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const [actualListNameValue, setActualListNameValue] = useState('')
 
@@ -51,17 +54,16 @@ const Dashboard = (props) => {
 
     //params
     const { userId } = useParams()
-/*
-    //when logging out, set showLists to false so that your lists are not displayed when you log in again
-    useEffect(()=> {
 
-        return ()=> {
-           // setShowLists(false)
-        }
-    }, [])
-*/
+
+
+
+
+
     /* fetching users lists */
     useEffect(() => {
+
+        setLoading(true)
 
         //console.log(typeof idOfSelectedList)
         const accessToken = localStorage.getItem('token')
@@ -78,9 +80,10 @@ const Dashboard = (props) => {
                 }
             })
                 .then(response => {
+                    
                     const data = response.data.result
 
-
+                    console.log(response.status)
                     setLists(
                         ...lists,
                         data
@@ -95,10 +98,12 @@ const Dashboard = (props) => {
                     setItems(items)
                     setListsInDb(data)
                     setLoggedIn(true)
+                    setLoading(false)
                 })
                 .catch(err => {
                     console.log(err)
                     setAuthenticated(false)
+                    setLoading(false)
                 })
         } else {
             axios.get(`${USER_DASHBOARD_URL}/${userId}`, {
@@ -140,7 +145,16 @@ const Dashboard = (props) => {
 
     }, [])
 
+/*
+    //controls the loading animation
+    useEffect(() => {
+        setLoading(true)
 
+        lists.length ? setLoading(false) : setLoading(true)
+
+    }, [lists])
+
+*/
     useEffect(() => {
         //console.log(idOfSelectedCategory)
     }, [idOfSelectedCategory])
@@ -240,7 +254,7 @@ const Dashboard = (props) => {
 
         setAddingItems(true)
 
-    
+
     }
 
     const handleClickOnAddCategory = (e) => {
@@ -359,47 +373,74 @@ const Dashboard = (props) => {
     } else {
 
         return (
-            <motion.main
-                className='dashboard'
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.25 }}
-            >
-                {!isSharedList ? <DashboardSidebar
-                    lists={lists}
-                    setLists={setLists}
-                    listsInDb={listsInDb}
-                    setDashboardDataHeading={setDashboardDataHeading}
-                    setIdOfSelectedList={setIdOfSelectedList}
-                    createNewCategory={createNewCategory}
-                    actualListNameValue={actualListNameValue}
-                    setActualListNameValue={setActualListNameValue}
-                    userId={userId}
-                    showLists={showLists}
-                /> : null}
-                <DashboardData
-                    dashboardDataHeading={dashboardDataHeading}
-                    idOfSelectedList={idOfSelectedList}
-                    handleClickOnAddItem={handleClickOnAddItem}
-                    handleClickOnAddCategory={handleClickOnAddCategory}
-                    categories={categories}
-                    setCategories={setCategories}
-                    handleDeleteItemClick={handleDeleteItemClick}
-                    handleDeleteCategoryClick={handleDeleteCategoryClick}
-                    handleClickOnCategory={handleClickOnCategory}
-                    items={items}
-                    setItems={setItems}
-                    listsInDb={listsInDb}
-                    idOfSelectedCategory={idOfSelectedCategory}
-                    actualListNameValue={actualListNameValue}
-                    lists={lists}
-                    isSharedList={isSharedList}
-                    shareUrl={shareUrl}
+
+            loading
+                ?
+                <Loader />
+                :
+                <motion.main
+                    className='dashboard'
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.25 }}
+                >
 
 
-                />
+                    {
+                        !isSharedList
+                            ?
+                            <DashboardSidebar
+                                lists={lists}
+                                setLists={setLists}
+                                listsInDb={listsInDb}
+                                setDashboardDataHeading={setDashboardDataHeading}
+                                setIdOfSelectedList={setIdOfSelectedList}
+                                createNewCategory={createNewCategory}
+                                actualListNameValue={actualListNameValue}
+                                setActualListNameValue={setActualListNameValue}
+                                userId={userId}
+                                showLists={showLists}
+                            />
+                            :
+                            null
+                    }
 
-            </motion.main>
+
+                    {
+                        loading
+                            ?
+                            <Loader />
+
+                            :
+
+                            <DashboardData
+                                dashboardDataHeading={dashboardDataHeading}
+                                idOfSelectedList={idOfSelectedList}
+                                handleClickOnAddItem={handleClickOnAddItem}
+                                handleClickOnAddCategory={handleClickOnAddCategory}
+                                categories={categories}
+                                setCategories={setCategories}
+                                handleDeleteItemClick={handleDeleteItemClick}
+                                handleDeleteCategoryClick={handleDeleteCategoryClick}
+                                handleClickOnCategory={handleClickOnCategory}
+                                items={items}
+                                setItems={setItems}
+                                listsInDb={listsInDb}
+                                idOfSelectedCategory={idOfSelectedCategory}
+                                actualListNameValue={actualListNameValue}
+                                lists={lists}
+                                isSharedList={isSharedList}
+                                shareUrl={shareUrl}
+                            />
+
+                    }
+
+
+
+
+
+
+                </motion.main>
         )
 
     }

@@ -3,6 +3,7 @@ import React from 'react'
 //components
 import OneList from './OneList'
 
+
 //config
 import { MY_LIST_URL } from '../config.js'
 
@@ -29,15 +30,15 @@ const DashboardSidebar = (props) => {
     const createNewList = () => {
 
         const listId = new Date().getTime()
-            setLists(
-                [...lists,
-                {
-                    _id: listId,
-                    value: '',
-                    type: 'text',
-                    shareUrl: `${MY_LIST_URL}/${userId}/${listId}`
-                }]
-            )
+        setLists(
+            [...lists,
+            {
+                _id: listId,
+                value: '',
+                type: 'text',
+                shareUrl: `${MY_LIST_URL}/${userId}/${listId}`
+            }]
+        )
     }
 
     const handleClickCreateNewList = () => {
@@ -49,27 +50,31 @@ const DashboardSidebar = (props) => {
 
         <button onClick={handleClickCreateNewList} className='new-list-button'>Create new list</button>
 
-        <ul className='lists' >
-            {lists.map((oneList) => {
-                return <OneList
-                    key={oneList._id}
-                    id={oneList._id}
-                    value={oneList.listName}
-                    shareUrl={oneList.shareUrl}
-                    type='text'
-                    name={'new-list-input'}
-                    idOfselectedList={idOfselectedList}
-                    lists={lists}
-                    setLists={setLists}
-                    listsInDb={listsInDb}
-                    setDashboardDataHeading={setDashboardDataHeading}
-                    setIdOfSelectedList={setIdOfSelectedList}
-                    createNewCategory={createNewCategory}
-                    actualListNameValue={actualListNameValue}
-                    setActualListNameValue={setActualListNameValue}
-                />
-            })}
-        </ul>
+        
+         
+            <ul className='lists' >
+                {lists.map((oneList) => {
+                    return <OneList
+                        key={oneList._id}
+                        id={oneList._id}
+                        value={oneList.listName}
+                        shareUrl={oneList.shareUrl}
+                        type='text'
+                        name={'new-list-input'}
+                        idOfselectedList={idOfselectedList}
+                        lists={lists}
+                        setLists={setLists}
+                        listsInDb={listsInDb}
+                        setDashboardDataHeading={setDashboardDataHeading}
+                        setIdOfSelectedList={setIdOfSelectedList}
+                        createNewCategory={createNewCategory}
+                        actualListNameValue={actualListNameValue}
+                        setActualListNameValue={setActualListNameValue}
+                    />
+                })}
+            </ul>
+          
+        
 
     </aside>
 
