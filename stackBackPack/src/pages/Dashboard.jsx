@@ -83,7 +83,7 @@ const Dashboard = (props) => {
                     
                     const data = response.data.result
 
-                    console.log(response.status)
+                    //console.log(response.status)
                     setLists(
                         ...lists,
                         data

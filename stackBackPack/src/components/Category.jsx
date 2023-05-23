@@ -113,7 +113,7 @@ const Category = (props) => {
     const saveCategoryToDb = (savingCategory) => {
 
         const accessToken = localStorage.getItem('token')
-        console.log(savingCategory)
+        //console.log(savingCategory)
         axios.post(`${USER_DASHBOARD_URL}/${userId}`, {
             savingCategory
         }, {
