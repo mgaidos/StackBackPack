@@ -136,10 +136,13 @@ const Dashboard = (props) => {
                     setItems(items)
                     setListsInDb(data)
                     setLoggedIn(true)
+                    setLoading(false)
+                    
                 })
                 .catch(err => {
                     console.log(err)
                     setAuthenticated(false)
+                    setLoading(false)
                 })
         }
 
@@ -187,7 +190,6 @@ const Dashboard = (props) => {
         }
 
     }, [idOfSelectedList])
-
 
 
 
@@ -409,7 +411,7 @@ const Dashboard = (props) => {
                     {
                         loading
                             ?
-                            <Loader />
+                           <Loader />
 
                             :
 

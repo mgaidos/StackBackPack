@@ -16,6 +16,7 @@ const newItem = require('../controllers/newItem')
 const deleteItem = require('../controllers/deleteItem')
 const updateItem = require('../controllers/updateItem')
 const updateItemsOrder = require('../controllers/updateItemsOrder')
+const updateListsOpen = require('../controllers/updateListsOpen')
 
 router.route('/register').post(register)
 
@@ -44,6 +45,10 @@ router.put('/dashboard/:id', (req, res) => {
 
     if (customHeader === 'updateItem') {
         updateItem(req, res)
+    }
+
+    if (customHeader === 'updateOpen') {
+        updateListsOpen(req, res)
     }
 })
 

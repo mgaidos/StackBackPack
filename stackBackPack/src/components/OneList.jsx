@@ -28,7 +28,8 @@ const OneList = (props) => {
     type,
     name,
     createNewCategory,
-    shareUrl
+    shareUrl,
+    open
   } = props
 
   const [listNameExist, setListNameExist] = useState(false)
@@ -103,7 +104,7 @@ const OneList = (props) => {
       const listName = e.target.value
 
       axios.post(`${USER_DASHBOARD_URL}/${userId}`, {
-        _id, user, listName, shareUrl
+        _id, user, listName, shareUrl, open
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +130,7 @@ const OneList = (props) => {
 
       return
     }
-  
+
   }
 
 
@@ -143,7 +144,7 @@ const OneList = (props) => {
       headers: {
         'Content-Type': 'application/json',
         'Custom-Header': 'deleteList',
-        'Authorization' : accessToken
+        'Authorization': accessToken
       },
       data: { removedListId: removedListId }
     })
@@ -160,10 +161,39 @@ const OneList = (props) => {
 
   const handleClickOnInput = (e) => {
 
+    const accessToken = localStorage.getItem('token')
+    const _id = e.target.id
+
     setActualListNameValue(value)
     setIdOfSelectedList(e.target.id)
     setDashboardDataHeading(e.target.value)
     e.target.value ? createNewCategory(e) : ''
+
+    lists.map(oneList => {
+      oneList.id == id ? {...oneList, open: true} : null
+    })
+
+    axios.put(`${USER_DASHBOARD_URL}/${userId}`, {
+      _id, open
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Custom-Header': 'updateOpen',
+        'Authorization': accessToken
+      }
+    })
+      .then(response => {
+        const data = response.data
+
+        if (data.message === 'List open update was successful') {
+
+        } else {
+          return
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
   }
 

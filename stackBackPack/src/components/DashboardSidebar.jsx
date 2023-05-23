@@ -36,13 +36,16 @@ const DashboardSidebar = (props) => {
                 _id: listId,
                 value: '',
                 type: 'text',
-                shareUrl: `${MY_LIST_URL}/${userId}/${listId}`
+                shareUrl: `${MY_LIST_URL}/${userId}/${listId}`,
+                open: false
             }]
         )
     }
 
     const handleClickCreateNewList = () => {
         createNewList()
+
+        console.log(lists)
     }
     return <aside className={` ${showLists ? 'open' : 'not-open'}`}>
         <h3>Your lists</h3>
@@ -59,6 +62,7 @@ const DashboardSidebar = (props) => {
                         id={oneList._id}
                         value={oneList.listName}
                         shareUrl={oneList.shareUrl}
+                        open={oneList.open}
                         type='text'
                         name={'new-list-input'}
                         idOfselectedList={idOfselectedList}

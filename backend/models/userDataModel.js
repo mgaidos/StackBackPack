@@ -92,7 +92,12 @@ const userDataSchema = Schema({
     required: false
   },
 
-  listCategories: [categoriesSchema]
+  listCategories: [categoriesSchema],
+
+  open: {
+    type: Boolean,
+    require: false
+  }
 
 })
 

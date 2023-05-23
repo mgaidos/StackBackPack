@@ -296,7 +296,7 @@ const Item = (props) => {
                     <input className={isSharedList ? 'read-only input-qty' : 'input-qty'} type="number" min={0} name='item-pcs' defaultValue={quantity ? quantity : 0} placeholder='pcs' />
                     <div className='select-weight'>
                         <input className={isSharedList ? 'read-only' : ''} type="number" min={0} name='item-weight' defaultValue={weight ? weight : 0} placeholder='0' />
-                        <select defaultValue={unit} name='item-unit' id='unit-of-weight'>
+                        <select defaultValue={unit} name='item-unit'>
                             <option value="g">g</option>
                             <option value="kg">kg</option>
                         </select>
